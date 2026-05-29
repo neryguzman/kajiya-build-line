@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-028",
+  "active_workstream": "qa_governance",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -40,7 +40,7 @@
     "Completed KBL-025: implemented and verified add-issue --from-json support with temp-repo activation and duplicate detection.",
     "Completed KBL-027: added schema-validated test scenario artifacts and documented human/chat deterministic contract architecture."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-028: Add deterministic test scenario runner",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

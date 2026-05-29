@@ -1,0 +1,47 @@
+{
+  "issue_id": "KBL-028",
+  "title": "Add deterministic test scenario runner",
+  "priority": "P0",
+  "type": "qa_governance",
+  "problem": "Kajiya Build Line can now store schema-validated test scenario artifacts, but it cannot execute them deterministically yet. This means humans/chats can design QA contracts, but QA still cannot run those contracts automatically.",
+  "expected_behavior": "A deterministic run-scenario command reads a docs/test-scenarios/*.json artifact, executes its setup, writes input files, runs commands, evaluates simple assertions, and returns JSON-compatible pass/fail output without modifying the main repository state.",
+  "proposed_change": [
+    "Add src/kajiya_build_line/run_scenario.py.",
+    "Add CLI command: kajiya-build-line run-scenario --scenario FILE.",
+    "Support test scenarios with setup_commands, input_files, commands, assertions, and cleanup_policy.",
+    "Execute scenarios inside a temporary working directory when setup uses TMP_REPO.",
+    "Write input_files before running commands.",
+    "Capture command stdout, stderr, and returncode.",
+    "Evaluate assertion types: equals and contains.",
+    "Support JSON path assertions for simple paths like $.ok, $.runtime_status, $.active_issue_id, and $.items.length.",
+    "Return JSON-compatible output with scenario_id, ok, command_results, assertion_results, and next_safe_actions.",
+    "Do not integrate run-scenario into qa yet.",
+    "Do not implement Builder retry or repair loops yet."
+  ],
+  "files_likely_to_change": [
+    "src/kajiya_build_line/run_scenario.py",
+    "src/kajiya_build_line/cli.py",
+    "docs/evidence/",
+    "docs/task-briefs/KBL-028.json"
+  ],
+  "validation_commands": [
+    "python -m compileall src",
+    "kajiya-build-line validate-json",
+    "kajiya-build-line run-scenario --scenario docs/test-scenarios/KBL-025-add-issue-from-json.json",
+    "kajiya-build-line qa",
+    "git --no-pager diff --check"
+  ],
+  "close_criteria": [
+    "run-scenario command exists.",
+    "run-scenario can execute docs/test-scenarios/KBL-025-add-issue-from-json.json.",
+    "Command writes input_files into the scenario working directory.",
+    "Command captures command results.",
+    "Command evaluates equals assertions.",
+    "Command evaluates items.length assertion.",
+    "Command returns JSON-compatible output.",
+    "Main repo state is not modified by running the scenario.",
+    "QA passes.",
+    "validate-json passes."
+  ],
+  "activate": true
+}
