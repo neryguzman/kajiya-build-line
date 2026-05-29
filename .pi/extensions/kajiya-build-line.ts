@@ -52,16 +52,16 @@ Rules:
 export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
   const registerOnboard = (name: string) => {
     pi.registerCommand(name, {
-      description: "Run Kajiya Build Line project onboarding/readiness discovery.",
+      description: "Prepare Kajiya Build Line project onboarding/readiness discovery.",
       handler: async (_args, ctx) => {
-        const prompt = onboardingPrompt();
+        const prompt = onboardingPrompt().trim();
+
+        ctx.ui.setEditorText(prompt);
 
         ctx.ui.notify(
-          "Running kajiya_onboard_project. Read-only repo discovery prompt injected.",
+          "kajiya_onboard_project prompt is now in the editor. Press Enter to run it.",
           "info"
         );
-
-        await ctx.sessionManager.addUserMessage?.(prompt);
       },
     });
   };
