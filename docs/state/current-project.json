@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-008",
-  "active_workstream": "human_authored_task_brief",
+  "active_issue_id": "KBL-009",
+  "active_workstream": "json_schema_validation",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -20,7 +20,7 @@
     "Completed KBL-007: implemented deterministic evidence collection command with read, list, grep, and git-log support.",
     "Completed KBL-008: implemented human-authored task-brief command for bounded Builder instructions."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-009: implement kajiya-build-line validate-json for deterministic JSON Schema validation.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

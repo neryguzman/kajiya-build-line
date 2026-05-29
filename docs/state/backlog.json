@@ -322,6 +322,54 @@
       "evidence": [
         "docs/evidence/kbl-008-task-brief-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-009",
+      "title": "Add JSON Schema validation command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "schema_validation",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line now has multiple durable JSON artifacts and JSON-producing commands, but it does not yet validate them against their JSON Schemas.",
+      "expected_behavior": "A deterministic read-only command validates key project JSON artifacts against schemas and returns JSON-compatible validation results.",
+      "proposed_change": [
+        "Add docs/pi-devs/kajiya_validate_json.md.",
+        "Add docs/schemas/kajiya-validation.schema.json.",
+        "Add src/kajiya_build_line/validate_json.py.",
+        "Add CLI command: kajiya-build-line validate-json.",
+        "Validate .kajiya/project.json against docs/schemas/kajiya-project.schema.json.",
+        "Validate docs/task-briefs/KBL-008.json against docs/schemas/kajiya-task-brief.schema.json.",
+        "Validate a generated evidence payload against docs/schemas/kajiya-evidence.schema.json.",
+        "Return JSON-compatible output.",
+        "Keep validation deterministic and read-only."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/validate_json.py",
+        "src/kajiya_build_line/cli.py",
+        "pyproject.toml",
+        "docs/pi-devs/kajiya_validate_json.md",
+        "docs/schemas/kajiya-validation.schema.json",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line validate-json",
+        "kajiya-build-line status",
+        "kajiya-build-line qa",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "validate-json command exists.",
+        "Project profile validates against its schema.",
+        "Task brief validates against its schema.",
+        "Evidence payload validates against its schema.",
+        "Command returns JSON-compatible output.",
+        "Command is read-only.",
+        "QA passes."
+      ]
     }
   ]
 }
