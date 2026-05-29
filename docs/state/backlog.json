@@ -1182,6 +1182,44 @@
         "validate-json passes."
       ],
       "created_at": "2026-05-30"
+    },
+    {
+      "issue_id": "KBL-026",
+      "title": "Rename builder plan command to builder context",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "pi_extension_boundary",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The Pi slash command /kajiya-builder-plan suggests that Pi should create the plan, but Kajiya Build Line's architecture requires planning to remain with the human/operator and advisory chats. Pi should only prepare bounded context from an existing human-authored task brief.",
+      "expected_behavior": "The official Pi command is renamed to /kajiya-builder-context and documented as a context-preparation command, not a strategy or roadmap planning command. The old /kajiya-builder-plan command may remain as a deprecated alias temporarily.",
+      "proposed_change": [
+        "Update .pi/extensions/kajiya-build-line.ts to expose /kajiya-builder-context.",
+        "Keep /kajiya-builder-plan as a deprecated alias if low-risk.",
+        "Update docs to clarify that Pi prepares bounded Builder context but does not decide strategy or roadmap.",
+        "Ensure generated prompt/context points to docs/task-briefs/ISSUE_ID.json as the source of truth."
+      ],
+      "files_likely_to_change": [
+        ".pi/extensions/kajiya-build-line.ts",
+        "docs/evidence/",
+        "docs/task-briefs/KBL-026.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "/kajiya-builder-context exists.",
+        "/kajiya-builder-context prepares bounded context from a task brief.",
+        "/kajiya-builder-context explicitly says it must not invent strategy or roadmap.",
+        "/kajiya-builder-plan is either removed or kept only as a deprecated alias.",
+        "QA passes.",
+        "validate-json passes."
+      ],
+      "created_at": "2026-05-30"
     }
   ]
 }
