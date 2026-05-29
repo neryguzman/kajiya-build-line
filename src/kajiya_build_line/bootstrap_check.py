@@ -11,18 +11,31 @@ REQUIRED_FILES = [
     "docs/LLM_HANDOFF_PROTOCOL.md",
 ]
 
-REQUIRED_DIR_MARKERS = [
-    "docs/evidence/.gitkeep",
-    "docs/task-briefs/.gitkeep",
+REQUIRED_DIRS = [
+    "docs/evidence",
+    "docs/task-briefs",
 ]
 
 
 def build_bootstrap_check_payload(start: Path | None = None) -> dict[str, Any]:
     root = (start or Path.cwd()).resolve()
 
-    required = [*REQUIRED_FILES, *REQUIRED_DIR_MARKERS]
-    present = [rel for rel in required if (root / rel).exists()]
-    missing = [rel for rel in required if not (root / rel).exists()]
+    required = [*REQUIRED_FILES, *REQUIRED_DIRS]
+
+    present = []
+    missing = []
+
+    for rel in REQUIRED_FILES:
+        if (root / rel).is_file():
+            present.append(rel)
+        else:
+            missing.append(rel)
+
+    for rel in REQUIRED_DIRS:
+        if (root / rel).is_dir():
+            present.append(rel)
+        else:
+            missing.append(rel)
 
     initialized = not missing
 
