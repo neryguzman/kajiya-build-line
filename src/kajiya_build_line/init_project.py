@@ -136,6 +136,109 @@ Read in this order:
 """
 
 
+def agents_md(project_id: str, project_name: str, project_type: str) -> str:
+    return f"""# AGENTS.md — Kajiya Build Line instructions
+
+## Project
+
+- project_id: {project_id}
+- project_name: {project_name}
+- project_type: {project_type}
+
+## Runtime
+
+Pi/Pocock is the selected interactive coding-agent runtime for this repository.
+
+Kajiya Build Line is the deterministic project governance layer.
+
+Use Pi for coding-agent interaction, reasoning, prompt templates, skills, and extensions.
+
+Use Kajiya Build Line for project-local state, backlog, evidence, task briefs, QA, JSON Schema validation, and issue transitions.
+
+## Required startup flow
+
+Before making changes, run:
+
+    kajiya-build-line bootstrap-check
+    kajiya-build-line next
+    kajiya-build-line summary
+    kajiya-build-line qa
+
+Do not rely on chat memory as the source of truth.
+
+Read project-local files instead:
+
+    .kajiya/project.json
+    docs/state/current-project.json
+    docs/state/backlog.json
+    docs/LLM_HANDOFF_PROTOCOL.md
+
+## Operating rules
+
+- Backlog before code.
+- Evidence before task brief.
+- Human-authored task brief before Builder.
+- Allowed files before edits.
+- QA before commit.
+- JSON Schema validation before close-issue.
+- Git commits preserve evidence.
+- External writes require explicit human confirmation.
+- Do not silently modify project governance files outside the selected issue.
+
+## Deterministic-first workflow
+
+Prefer deterministic commands:
+
+    kajiya-build-line next
+    kajiya-build-line summary
+    kajiya-build-line status
+    kajiya-build-line evidence
+    kajiya-build-line task-brief
+    kajiya-build-line qa
+    kajiya-build-line validate-json
+    kajiya-build-line close-issue
+
+Invoke the LLM only after deterministic context is available.
+
+## Upstream improvement protocol
+
+If this repository reveals an improvement to Kajiya Build Line itself, do not silently fork the framework behavior here.
+
+Instead:
+
+1. Record the observation in this repository as evidence or a backlog note.
+2. Create a task brief describing the reusable framework improvement.
+3. Propose the improvement upstream to the main `kajiya-build-line` repository.
+4. Implement the change in the main Build Line repo.
+5. Run QA and JSON Schema validation there.
+6. Merge/push the main repo change.
+7. Update this repository to the improved Build Line behavior.
+
+Reusable framework improvements belong upstream.
+
+Project-specific behavior belongs in this repository.
+
+## Self-modifying / regenerative agent boundary
+
+Agents may propose improvements to their own tooling only through bounded workflows:
+
+- selected backlog issue
+- deterministic evidence
+- human-authored task brief
+- explicit allowed files
+- explicit forbidden actions
+- QA
+- JSON Schema validation
+- diff review
+- git commit
+- close-issue
+
+The agent may reason.
+
+The deterministic layer decides whether project state is valid.
+"""
+
+
 def init_project(
     root: Path,
     project_id: str,
