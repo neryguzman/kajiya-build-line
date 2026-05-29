@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-builder-patch-plan.schema.json",
+  "title": "Kajiya Builder Patch Plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "ok",
+    "pi_dev_id",
+    "runtime_status",
+    "issue_id",
+    "evidence_read",
+    "files_likely_to_change",
+    "implementation_plan",
+    "validation_commands",
+    "requires_human_approval",
+    "next_safe_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.builder_patch_plan.v1"
+    },
+    "kind": {
+      "const": "kajiya_builder_patch_plan"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "pi_dev_id": {
+      "const": "kajiya_builder_patch_plan"
+    },
+    "runtime_status": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "evidence_read": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "proposed_change_type": {
+      "type": "string"
+    },
+    "files_likely_to_change": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "implementation_plan": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "validation_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_human_approval": {
+      "type": "boolean"
+    },
+    "next_safe_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}
