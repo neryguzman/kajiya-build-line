@@ -379,7 +379,7 @@
     {
       "issue_id": "KBL-010",
       "title": "Refactor CLI command routing to argparse subparsers",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "cli_architecture",
       "claim_status": "claimed",
@@ -419,6 +419,11 @@
         "close-issue command still works.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-010-cli-subparser-routing.md"
       ]
     }
   ]

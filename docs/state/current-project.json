@@ -19,9 +19,10 @@
     "Completed KBL-005: verified Builder as bounded Pi/Pocock plan-only reasoning step and documented boundary decision.",
     "Completed KBL-007: implemented deterministic evidence collection command with read, list, grep, and git-log support.",
     "Completed KBL-008: implemented human-authored task-brief command for bounded Builder instructions.",
-    "Completed KBL-009: implemented deterministic JSON Schema validation command."
+    "Completed KBL-009: implemented deterministic JSON Schema validation command.",
+    "Completed KBL-010: refactored CLI routing to argparse subparsers while preserving existing command behavior."
   ],
-  "next_recommended_action": "Work on KBL-010: refactor CLI routing to argparse subparsers while preserving existing command behavior.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
