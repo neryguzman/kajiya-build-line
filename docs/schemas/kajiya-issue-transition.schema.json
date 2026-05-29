@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-issue-transition.schema.json",
+  "title": "Kajiya Issue Transition",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "ok",
+    "pi_dev_id",
+    "runtime_status",
+    "next_safe_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.issue_transition.v1"
+    },
+    "kind": {
+      "const": "kajiya_issue_transition"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "pi_dev_id": {
+      "const": "kajiya_issue_transition"
+    },
+    "runtime_status": {
+      "type": "string"
+    },
+    "closed_issue_id": {
+      "type": "string"
+    },
+    "activated_issue_id": {
+      "type": ["string", "null"]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "updated_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_safe_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}
