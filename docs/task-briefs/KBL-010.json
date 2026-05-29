@@ -1,0 +1,38 @@
+{
+  "schema_version": "kajiya.task_brief.v1",
+  "kind": "kajiya_task_brief",
+  "issue_id": "KBL-010",
+  "created_at": "2026-05-29",
+  "updated_at": "2026-05-29",
+  "source_of_truth": "docs/task-briefs/KBL-010.json",
+  "human_instruction": "Refactor CLI routing to argparse subparsers without changing command behavior.",
+  "evidence_refs": [
+    "docs/evidence/kbl-009-validate-json-command.md"
+  ],
+  "allowed_files": [
+    "src/kajiya_build_line/cli.py"
+  ],
+  "validation_commands": [
+    "kajiya-build-line qa"
+  ],
+  "forbidden_actions": [
+    "Do not modify files outside allowed_files.",
+    "Do not invoke external writes.",
+    "Do not commit.",
+    "Do not close issues.",
+    "Do not use direct Gemini SDK."
+  ],
+  "builder_mode": "bounded_patch_plan",
+  "requires_human_approval": true,
+  "next_safe_actions": [
+    {
+      "action": "run_builder_plan",
+      "command": "/kajiya-builder-plan issue_id=KBL-010",
+      "brief": "docs/task-briefs/KBL-010.json"
+    },
+    {
+      "action": "review_brief",
+      "path": "docs/task-briefs/KBL-010.json"
+    }
+  ]
+}
