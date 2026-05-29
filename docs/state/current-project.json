@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
-  "active_issue_id": "KBL-028",
-  "active_workstream": "qa_governance",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -38,9 +38,10 @@
     "Completed KBL-024: implemented read-only checkpoint orientation command for deterministic human/chat decision packets.",
     "Completed KBL-026: added /kajiya-builder-context semantics and /kajiya-builder-implement bounded implementation launcher.",
     "Completed KBL-025: implemented and verified add-issue --from-json support with temp-repo activation and duplicate detection.",
-    "Completed KBL-027: added schema-validated test scenario artifacts and documented human/chat deterministic contract architecture."
+    "Completed KBL-027: added schema-validated test scenario artifacts and documented human/chat deterministic contract architecture.",
+    "Completed KBL-028: implemented deterministic run-scenario command and verified the KBL-025 add-issue --from-json behavior contract."
   ],
-  "next_recommended_action": "Work on KBL-028: Add deterministic test scenario runner",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
