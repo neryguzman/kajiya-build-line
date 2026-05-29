@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-005",
-  "active_workstream": "builder",
+  "active_issue_id": "KBL-007",
+  "active_workstream": "deterministic_evidence_collection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -18,7 +18,7 @@
     "Completed KBL-006: implemented deterministic close-issue command for backlog/current-project transitions.",
     "Completed KBL-005: verified Builder as bounded Pi/Pocock plan-only reasoning step and documented boundary decision."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-007: implement kajiya-build-line evidence for read-only evidence collection.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

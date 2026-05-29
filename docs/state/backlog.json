@@ -219,6 +219,51 @@
       "evidence": [
         "docs/evidence/kbl-006-close-issue-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-007",
+      "title": "Add deterministic evidence collection command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "evidence",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The operator wants to ask Kajiya Build Line to gather outputs from files, scripts, grep searches, directory listings, and git state without relying on free-form shell commands invented by the LLM.",
+      "expected_behavior": "A deterministic command can collect requested evidence from safe read-only operations and return JSON-compatible output for Builder or human review.",
+      "proposed_change": [
+        "Add docs/pi-devs/kajiya_evidence.md.",
+        "Add docs/schemas/kajiya-evidence.schema.json.",
+        "Add src/kajiya_build_line/evidence.py.",
+        "Add CLI command: kajiya-build-line evidence.",
+        "Support read-only evidence types: --read, --list, --grep, --grep-path, --git-log.",
+        "Return JSON-compatible output.",
+        "Do not modify files."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/evidence.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/pi-devs/kajiya_evidence.md",
+        "docs/schemas/kajiya-evidence.schema.json",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line evidence --read docs/state/backlog.json --list src/kajiya_build_line --grep close_issue --grep-path src --git-log 5",
+        "kajiya-build-line status",
+        "kajiya-build-line qa",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "Evidence command supports safe file reads.",
+        "Evidence command supports directory listings.",
+        "Evidence command supports grep over an explicit path.",
+        "Evidence command supports git log summary.",
+        "Command returns JSON-compatible output.",
+        "Command is read-only.",
+        "QA passes."
+      ]
     }
   ]
 }
