@@ -10,6 +10,7 @@ from kajiya_build_line.add_issue import add_issue
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.backlog_orient import build_backlog_orientation_payload
 from kajiya_build_line.bootstrap_check import build_bootstrap_check_payload
+from kajiya_build_line.checkpoint import build_checkpoint_payload
 from kajiya_build_line.evidence import build_evidence_payload
 from kajiya_build_line.init_project import init_project
 from kajiya_build_line.project_detect import build_status_payload
@@ -124,6 +125,10 @@ def handle_task_brief(args: argparse.Namespace) -> int:
     return print_json(payload)
 
 
+def handle_checkpoint(args: argparse.Namespace) -> int:
+    return print_json(build_checkpoint_payload(Path.cwd()))
+
+
 def handle_close_issue(args: argparse.Namespace) -> int:
     payload = close_issue(
         root=Path.cwd(),
@@ -226,6 +231,12 @@ def build_parser() -> argparse.ArgumentParser:
     task_brief_parser.add_argument("--validation", action="append", default=[])
     task_brief_parser.add_argument("--forbidden-action", action="append", default=[])
     task_brief_parser.set_defaults(handler=handle_task_brief)
+
+    checkpoint_parser = subparsers.add_parser(
+        "checkpoint",
+        help="Show read-only deterministic checkpoint orientation.",
+    )
+    checkpoint_parser.set_defaults(handler=handle_checkpoint)
 
     close_issue_parser = subparsers.add_parser(
         "close-issue",
