@@ -923,7 +923,7 @@
     {
       "issue_id": "KBL-021",
       "title": "Add schema validation for upstream improvement artifacts",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "schema_validation",
       "claim_status": "claimed",
@@ -959,6 +959,11 @@
         "validate-json still validates project profile and task brief.",
         "qa passes with json_schema_validation.",
         "Command output remains JSON-compatible."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-021-upstream-improvement-schema-validation.md"
       ]
     }
   ]

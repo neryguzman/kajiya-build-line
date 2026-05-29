@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-021",
-  "active_workstream": "upstream_improvement_schema_validation",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -31,9 +31,10 @@
     "Completed KBL-016: implemented bootstrap-check for read-only repository readiness detection and fixed directory initialization logic.",
     "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol.",
     "Completed KBL-019: fixed init-project so AGENTS.md is actually created, listed in created_files, and protected by no-overwrite conflicts.",
-    "Completed KBL-020: implemented upstream-improvement command for reusable framework improvement proposals from child repos."
+    "Completed KBL-020: implemented upstream-improvement command for reusable framework improvement proposals from child repos.",
+    "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts."
   ],
-  "next_recommended_action": "Work on KBL-021: add schema validation for upstream improvement proposal artifacts.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
