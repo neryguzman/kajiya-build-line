@@ -145,10 +145,10 @@
     {
       "issue_id": "KBL-005",
       "title": "Design Builder as bounded Pi/Pocock reasoning step",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P1",
       "type": "builder",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "The project needs a Builder step that uses Pi/Pocock's configured model without adding a separate Gemini SDK client.",
       "expected_behavior": "The Builder receives a selected issue_id and local evidence, then returns a structured patch plan without modifying files.",
       "files_likely_to_change": [
@@ -171,7 +171,7 @@
     {
       "issue_id": "KBL-006",
       "title": "Add deterministic issue transition and close command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "backlog_governance",
       "claim_status": "claimed",
@@ -208,7 +208,12 @@
         "QA passes after transition."
       ],
       "claimed_by": "Nery + ChatGPT",
-      "branch": "main"
+      "branch": "main",
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-006-close-issue-command.md"
+      ]
     }
   ]
 }

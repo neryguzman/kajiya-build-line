@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-006",
-  "active_workstream": "deterministic_issue_transition_command",
+  "active_issue_id": "KBL-005",
+  "active_workstream": "builder",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -14,9 +14,10 @@
     "Completed KBL-001: project objective, backlog, current-project state, handoff protocol, and project-scope decision are committed and pushed.",
     "Completed KBL-002: /kajiya-onboard was verified through Pi, read local evidence, returned JSON-compatible output, and remained read-only.",
     "Completed KBL-003: created .kajiya/project.json, JSON Schema, pi.dev documentation, and evidence for project profile initialization.",
-    "Completed KBL-004: implemented deterministic status and QA commands with JSON-compatible output."
+    "Completed KBL-004: implemented deterministic status and QA commands with JSON-compatible output.",
+    "Completed KBL-006: implemented deterministic close-issue command for backlog/current-project transitions."
   ],
-  "next_recommended_action": "Work on KBL-006: implement kajiya-build-line close-issue so backlog/current-project transitions no longer require ad-hoc Python snippets.",
+  "next_recommended_action": "Work on KBL-005: Design Builder as bounded Pi/Pocock reasoning step",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
