@@ -1,0 +1,41 @@
+{
+  "schema_version": "kajiya.task_brief.v1",
+  "kind": "kajiya_task_brief",
+  "issue_id": "KBL-026",
+  "created_at": "2026-05-30",
+  "updated_at": "2026-05-30",
+  "source_of_truth": "docs/task-briefs/KBL-026.json",
+  "human_instruction": "Rename the Pi extension command semantics from builder-plan to builder-context. Add /kajiya-builder-context as the official command for preparing bounded Builder context from an existing human-authored task brief. Keep /kajiya-builder-plan only as a deprecated alias if low-risk. The command text must clearly state that Pi must not invent strategy, roadmap, or implementation plan; it only prepares bounded context for the Builder using docs/task-briefs/ISSUE_ID.json as source of truth.",
+  "evidence_refs": [
+    "docs/evidence/kbl-024-read-only-checkpoint-orientation.md"
+  ],
+  "allowed_files": [
+    ".pi/extensions/kajiya-build-line.ts",
+    "docs/task-briefs/KBL-026.json"
+  ],
+  "validation_commands": [
+    "kajiya-build-line qa",
+    "kajiya-build-line validate-json",
+    "git --no-pager diff --check",
+    "python -m compileall src"
+  ],
+  "forbidden_actions": [
+    "Do not modify Python CLI files.",
+    "Do not change backlog/current-project state from the extension.",
+    "Do not remove /kajiya-builder-plan unless compatibility risk is clearly low.",
+    "Do not make Pi responsible for strategy, roadmap, or planning."
+  ],
+  "builder_mode": "bounded_patch_plan",
+  "requires_human_approval": true,
+  "next_safe_actions": [
+    {
+      "action": "run_builder_plan",
+      "command": "/kajiya-builder-plan issue_id=KBL-026",
+      "brief": "docs/task-briefs/KBL-026.json"
+    },
+    {
+      "action": "review_brief",
+      "path": "docs/task-briefs/KBL-026.json"
+    }
+  ]
+}
