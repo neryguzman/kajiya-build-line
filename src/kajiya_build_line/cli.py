@@ -8,6 +8,7 @@ from kajiya_build_line.project_detect import build_status_payload
 from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.evidence import build_evidence_payload
+from kajiya_build_line.task_brief import create_task_brief
 
 
 def print_json(payload: dict) -> int:
@@ -21,6 +22,31 @@ def status() -> int:
 
 def qa() -> int:
     return print_json(build_qa_payload(Path.cwd()))
+
+
+def task_brief_command(argv: list[str]) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="kajiya-build-line task-brief")
+    parser.add_argument("--issue-id", required=True)
+    parser.add_argument("--instruction", required=True)
+    parser.add_argument("--evidence", action="append", default=[])
+    parser.add_argument("--allowed-file", action="append", default=[])
+    parser.add_argument("--validation", action="append", default=[])
+    parser.add_argument("--forbidden-action", action="append", default=[])
+
+    args = parser.parse_args(argv)
+
+    payload = create_task_brief(
+        root=Path.cwd(),
+        issue_id=args.issue_id,
+        instruction=args.instruction,
+        evidence=args.evidence,
+        allowed_files=args.allowed_file,
+        validation_commands=args.validation,
+        forbidden_actions=args.forbidden_action,
+    )
+    return print_json(payload)
 
 
 def evidence_command(argv: list[str]) -> int:
@@ -73,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
 
     if not argv or argv[0] in {"help", "--help", "-h"}:
-        print("Usage: kajiya-build-line status|qa|close-issue|evidence")
+        print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief")
         return 0
 
     command = argv[0]
@@ -84,6 +110,9 @@ def main(argv: list[str] | None = None) -> int:
     if command == "qa":
         return qa()
 
+    if command == "task-brief":
+        return task_brief_command(argv[1:])
+
     if command == "evidence":
         return evidence_command(argv[1:])
 
@@ -91,7 +120,7 @@ def main(argv: list[str] | None = None) -> int:
         return close_issue_command(argv[1:])
 
     print(f"Unknown command: {command}", file=sys.stderr)
-    print("Usage: kajiya-build-line status|qa|close-issue|evidence", file=sys.stderr)
+    print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief", file=sys.stderr)
     return 2
 
 
