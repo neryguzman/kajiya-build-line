@@ -1,0 +1,37 @@
+{
+  "issue_id": "KBL-027",
+  "title": "Add deterministic test scenario artifacts",
+  "priority": "P0",
+  "type": "qa_governance",
+  "problem": "KBL-025 showed that generic QA can pass while critical behavior is still broken. The add-issue --from-json implementation passed compile, qa, validate-json, and diff checks, but only a human-designed temp repo behavior test exposed the argparse required-fields bug. Kajiya Build Line needs durable, repo-agnostic test scenario artifacts so humans/chats can define exactly what QA must verify.",
+  "expected_behavior": "Kajiya Build Line supports durable test scenario artifacts under docs/test-scenarios/*.json. These artifacts describe deterministic setup, input files, commands, expected JSON fields, and cleanup/escalation policy. The artifacts are schema-governed and can later be executed by a deterministic QA runner.",
+  "proposed_change": [
+    "Add docs/schemas/kajiya-test-scenario.schema.json.",
+    "Add docs/test-scenarios/KBL-025-add-issue-from-json.json as the first scenario artifact based on the temp repo test that caught the argparse bug.",
+    "Update validate-json to validate docs/test-scenarios/*.json.",
+    "Document that humans/chats own QA design and Pi/CLI executes QA deterministically.",
+    "Do not implement the test runner yet; this issue only creates the durable test scenario contract and validation gate."
+  ],
+  "files_likely_to_change": [
+    "docs/schemas/kajiya-test-scenario.schema.json",
+    "docs/test-scenarios/KBL-025-add-issue-from-json.json",
+    "src/kajiya_build_line/validate_json.py",
+    "docs/evidence/",
+    "docs/task-briefs/KBL-027.json"
+  ],
+  "validation_commands": [
+    "python -m compileall src",
+    "kajiya-build-line validate-json",
+    "kajiya-build-line qa",
+    "git --no-pager diff --check"
+  ],
+  "close_criteria": [
+    "Test scenario schema exists.",
+    "KBL-025 add-issue --from-json temp repo scenario exists as a JSON artifact.",
+    "validate-json validates docs/test-scenarios/*.json.",
+    "Existing validation for project profile, task briefs, and upstream improvements still passes.",
+    "QA passes.",
+    "Evidence documents why generic QA was insufficient for KBL-025."
+  ],
+  "activate": true
+}
