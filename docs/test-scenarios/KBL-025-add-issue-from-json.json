@@ -1,0 +1,82 @@
+{
+  "schema_version": "kajiya.test_scenario.v1",
+  "kind": "kajiya_test_scenario",
+  "issue_id": "KBL-025",
+  "scenario_id": "add_issue_from_json_temp_repo",
+  "description": "Verify add-issue --from-json creates and activates an issue in a fresh temp repo, and duplicate issue IDs are blocked.",
+  "setup_commands": [
+    "TMP_REPO=$(mktemp -d)",
+    "cd \"$TMP_REPO\"",
+    "git init",
+    "kajiya-build-line init-project --project-id temp-from-json-test --project-name \"Temp From JSON Test\" --project-type software_project"
+  ],
+  "input_files": [
+    {
+      "path": "issue.json",
+      "content_json": {
+        "issue_id": "TMP-001",
+        "title": "Temp issue from JSON",
+        "priority": "P0",
+        "type": "test",
+        "problem": "Need to verify add-issue --from-json works without long CLI args.",
+        "expected_behavior": "The command creates and activates a backlog item from JSON.",
+        "proposed_change": [
+          "Use --from-json."
+        ],
+        "files_likely_to_change": [
+          "README.md"
+        ],
+        "validation_commands": [
+          "echo ok"
+        ],
+        "close_criteria": [
+          "Issue is created."
+        ],
+        "activate": true
+      }
+    }
+  ],
+  "commands": [
+    "kajiya-build-line add-issue --from-json issue.json",
+    "cat docs/state/current-project.json",
+    "cat docs/state/backlog.json",
+    "kajiya-build-line add-issue --from-json issue.json"
+  ],
+  "assertions": [
+    {
+      "description": "First add-issue call succeeds.",
+      "source": "first_add_issue_result",
+      "json_path": "$.ok",
+      "equals": true
+    },
+    {
+      "description": "First add-issue call returns issue_added.",
+      "source": "first_add_issue_result",
+      "json_path": "$.runtime_status",
+      "equals": "issue_added"
+    },
+    {
+      "description": "The issue is activated in current-project.",
+      "source": "current_project",
+      "json_path": "$.active_issue_id",
+      "equals": "TMP-001"
+    },
+    {
+      "description": "Backlog contains exactly one item.",
+      "source": "backlog",
+      "json_path": "$.items.length",
+      "equals": 1
+    },
+    {
+      "description": "Second add-issue call blocks duplicate issue ID.",
+      "source": "duplicate_add_issue_result",
+      "json_path": "$.runtime_status",
+      "equals": "duplicate_issue_id"
+    }
+  ],
+  "cleanup_policy": "temp_repo_auto_delete",
+  "notes": [
+    "This scenario was created from the manual temp repo test that caught the argparse required-fields bug in KBL-025.",
+    "A future deterministic scenario runner should execute this artifact and evaluate assertions."
+  ]
+}

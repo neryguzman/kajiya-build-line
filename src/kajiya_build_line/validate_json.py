@@ -88,6 +88,16 @@ def build_validation_payload(root: Path) -> dict[str, Any]:
                 }
             )
 
+    test_scenario_dir = root / "docs" / "test-scenarios"
+    if test_scenario_dir.exists():
+        for path in sorted(test_scenario_dir.glob("*.json")):
+            validation_pairs.append(
+                {
+                    "instance_path": str(path.relative_to(root)),
+                    "schema_path": "docs/schemas/kajiya-test-scenario.schema.json",
+                }
+            )
+
     results = [
         validate_pair(root, pair["instance_path"], pair["schema_path"])
         for pair in validation_pairs

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kajiya-test-scenario.schema.json",
+  "title": "Kajiya Test Scenario",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "issue_id",
+    "scenario_id",
+    "description",
+    "setup_commands",
+    "input_files",
+    "commands",
+    "assertions",
+    "cleanup_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.test_scenario.v1"
+    },
+    "kind": {
+      "const": "kajiya_test_scenario"
+    },
+    "issue_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scenario_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "setup_commands": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content": {
+            "type": "string"
+          },
+          "content_json": {}
+        },
+        "oneOf": [
+          { "required": ["content"] },
+          { "required": ["content_json"] }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description"],
+        "properties": {
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string"
+          },
+          "json_path": {
+            "type": "string"
+          },
+          "equals": {},
+          "contains": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "cleanup_policy": {
+      "type": "string",
+      "enum": ["temp_repo_auto_delete", "manual_cleanup", "no_cleanup_required"]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
