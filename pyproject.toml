@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kajiya-build-line"
+version = "0.1.0"
+description = "Portable Kajiya build-line for backlog-governed, handoff-ready project work."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Nery Guzman" }
+]
+dependencies = []
+
+[project.scripts]
+kajiya-build-line = "kajiya_build_line.cli:main"
