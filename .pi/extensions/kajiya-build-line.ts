@@ -50,58 +50,71 @@ Rules:
 }
 
 
-function builderPlanPrompt(issueId: string): string {
+function builderContextPrompt(issueId: string): string {
   return `
-You are executing pi.dev kajiya_builder_patch_plan inside Kajiya Build Line.
+You are executing pi.dev kajiya_builder_context inside Kajiya Build Line.
 
 Role:
-- Produce a bounded implementation plan for a selected backlog issue.
+- Prepare bounded Builder context from an existing human-authored task brief.
+- Do not invent strategy.
+- Do not invent roadmap.
+- Do not invent backlog items.
+- Do not create an implementation plan.
 - Do not modify files.
 - Do not create code.
-- Do not run external writes.
-- Do not use direct Gemini SDK.
-- Use Pi/Pocock as the LLM runtime.
-- Use local project files as memory.
+- Do not commit.
+- Do not push.
+- Do not close issues.
 - Do not rely on previous chat memory.
 
 Selected issue_id:
 ${issueId}
 
-Before planning, inspect read-only evidence:
+Deterministic source of truth:
+- docs/task-briefs/${issueId}.json
+- docs/state/current-project.json
+- docs/state/backlog.json
+- kajiya-build-line checkpoint
+- kajiya-build-line backlog
+- kajiya-build-line qa
+- kajiya-build-line validate-json
 
-1. Run: kajiya-build-line status
-2. Run: kajiya-build-line qa
-3. Read: docs/state/backlog.json
-4. Read: docs/state/current-project.json
-5. Read: docs/pi-devs/kajiya_builder_patch_plan.md
-6. Read relevant schemas under docs/schemas/
+Before preparing context, inspect read-only evidence:
+
+1. Run: kajiya-build-line checkpoint
+2. Run: kajiya-build-line backlog
+3. Run: kajiya-build-line qa
+4. Run: kajiya-build-line validate-json
+5. Read: docs/task-briefs/${issueId}.json
+6. Read evidence paths referenced by the task brief if present.
+7. Read allowed_files from the task brief only if needed for context.
 
 Return JSON-compatible output with:
-- schema_version: "kajiya.builder_patch_plan.v1"
-- kind: "kajiya_builder_patch_plan"
+- schema_version: "kajiya.builder_context.v1"
+- kind: "kajiya_builder_context"
 - ok
-- pi_dev_id: "kajiya_builder_patch_plan"
+- pi_dev_id: "kajiya_builder_context"
 - runtime_status
 - issue_id
-- objective
+- task_brief_path
 - evidence_read
 - missing_evidence
-- proposed_change_type
-- files_likely_to_change
-- implementation_plan
+- allowed_files
+- forbidden_actions
 - validation_commands
-- risks
-- requires_human_approval
+- bounded_builder_context
 - next_safe_actions
 
 Rules:
-- Plan-only.
-- If git is dirty, return runtime_status "blocked_dirty_worktree".
-- If QA fails, return runtime_status "qa_failed".
-- If issue_id is missing or not found, return a blocking status.
+- Context-only.
+- Do not produce a strategic plan.
+- Do not propose a roadmap.
+- Do not propose new backlog items.
 - Do not claim files were changed.
-- Do not close issues.
-- Do not commit.
+- If git is dirty, report it but do not fix it.
+- If QA fails, report it but do not fix it.
+- The human/operator owns the plan.
+- The Builder may later implement only the human-authored task brief.
 `;
 }
 
@@ -125,19 +138,26 @@ export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
   registerOnboard("kajiya-onboard");
   registerOnboard("kajiya-build-line");
 
-  pi.registerCommand("kajiya-builder-plan", {
-    description: "Prepare a bounded Kajiya Builder patch plan prompt for a selected issue.",
-    handler: async (args, ctx) => {
-      const rawArgs = Array.isArray(args) ? args.join(" ") : String(args || "");
-      const match = rawArgs.match(/(?:issue_id=|--issue-id\s+)([A-Za-z0-9._-]+)/);
-      const issueId = match?.[1] || rawArgs.trim() || "KBL-005";
+  const registerBuilderContext = (name: string, deprecated = false) => {
+    pi.registerCommand(name, {
+      description: deprecated
+        ? "Deprecated alias for /kajiya-builder-context. Prepares bounded Builder context."
+        : "Prepare bounded Kajiya Builder context from a human-authored task brief.",
+      handler: async (args, ctx) => {
+        const rawArgs = Array.isArray(args) ? args.join(" ") : String(args || "");
+        const match = rawArgs.match(/(?:issue_id=|--issue-id\s+)([A-Za-z0-9._-]+)/);
+        const issueId = match?.[1] || rawArgs.trim() || "KBL-025";
 
-      const prompt = builderPlanPrompt(issueId).trim();
-      ctx.ui.setEditorText(prompt);
-      ctx.ui.notify(
-        `kajiya_builder_patch_plan prompt for ${issueId} is now in the editor. Press Enter to run it.`,
-        "info"
-      );
-    },
-  });
+        const prompt = builderContextPrompt(issueId).trim();
+        ctx.ui.setEditorText(prompt);
+        ctx.ui.notify(
+          `${name} context prompt for ${issueId} is now in the editor. Press Enter to run it.`,
+          deprecated ? "warn" : "info"
+        );
+      },
+    });
+  };
+
+  registerBuilderContext("kajiya-builder-context");
+  registerBuilderContext("kajiya-builder-plan", true);
 }
