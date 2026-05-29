@@ -1,0 +1,46 @@
+{
+  "schema_version": "kajiya.task_brief.v1",
+  "kind": "kajiya_task_brief",
+  "issue_id": "KBL-028",
+  "created_at": "2026-05-30",
+  "updated_at": "2026-05-30",
+  "source_of_truth": "docs/task-briefs/KBL-028.json",
+  "human_instruction": "Implement a deterministic run-scenario command. It must read a schema-validated test scenario JSON file, create an isolated temp working directory, write input_files, execute setup_commands and commands, capture stdout/stderr/returncode, evaluate simple assertions, and return JSON-compatible output. Support simple JSON paths: $.ok, $.runtime_status, $.active_issue_id, $.items.length. Do not integrate with qa yet. Do not implement Builder retry or repair loops.",
+  "evidence_refs": [
+    "docs/evidence/kbl-027-test-scenario-artifacts.md",
+    "docs/test-scenarios/KBL-025-add-issue-from-json.json"
+  ],
+  "allowed_files": [
+    "src/kajiya_build_line/run_scenario.py",
+    "src/kajiya_build_line/cli.py",
+    "docs/task-briefs/KBL-028.json"
+  ],
+  "validation_commands": [
+    "python -m compileall src",
+    "kajiya-build-line validate-json",
+    "kajiya-build-line run-scenario --scenario docs/test-scenarios/KBL-025-add-issue-from-json.json",
+    "kajiya-build-line qa",
+    "git --no-pager diff --check"
+  ],
+  "forbidden_actions": [
+    "Do not integrate run-scenario into qa yet.",
+    "Do not implement Builder retry or repair loops.",
+    "Do not modify docs/state/backlog.json or docs/state/current-project.json.",
+    "Do not commit.",
+    "Do not push.",
+    "Do not close issues automatically."
+  ],
+  "builder_mode": "bounded_patch_plan",
+  "requires_human_approval": true,
+  "next_safe_actions": [
+    {
+      "action": "run_builder_plan",
+      "command": "/kajiya-builder-plan issue_id=KBL-028",
+      "brief": "docs/task-briefs/KBL-028.json"
+    },
+    {
+      "action": "review_brief",
+      "path": "docs/task-briefs/KBL-028.json"
+    }
+  ]
+}
