@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-018",
+  "active_workstream": "agents_md_and_upstream_improvement_protocol",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -30,7 +30,7 @@
     "Completed KBL-017: documented Pi as the selected coding-agent runtime and Kajiya Build Line as the deterministic project governance layer.",
     "Completed KBL-016: implemented bootstrap-check for read-only repository readiness detection and fixed directory initialization logic."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-018: add AGENTS.md and upstream improvement protocol to init-project bootstrap.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

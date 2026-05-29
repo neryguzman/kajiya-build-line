@@ -771,6 +771,50 @@
       "evidence": [
         "docs/evidence/kbl-017-pi-runtime-boundary.md"
       ]
+    },
+    {
+      "issue_id": "KBL-018",
+      "title": "Add AGENTS.md and upstream improvement protocol to project bootstrap",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "portable_governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Bootstrapped repositories get Kajiya Build Line project files, but they do not yet get a root-level AGENTS.md explaining how Pi/coding agents should behave or how improvements discovered in child repos should be proposed back to the main kajiya-build-line repository.",
+      "expected_behavior": "init-project creates AGENTS.md with Kajiya Build Line operating rules, Pi runtime guidance, deterministic-first workflow, and upstream improvement protocol for proposing PRs back to the main Build Line repo.",
+      "proposed_change": [
+        "Update src/kajiya_build_line/init_project.py to create AGENTS.md.",
+        "Document Pi uses AGENTS.md as repo-level agent instructions.",
+        "Add upstream improvement protocol to AGENTS.md.",
+        "Explain that child repos should not silently fork Kajiya Build Line behavior.",
+        "Explain that reusable improvements should be proposed to the main kajiya-build-line repo.",
+        "Add evidence documenting AGENTS.md bootstrap behavior.",
+        "Ensure init-project refuses to overwrite AGENTS.md if it already exists."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/init_project.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line init-project --help",
+        "kajiya-build-line bootstrap-check",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "init-project creates AGENTS.md in new repos.",
+        "AGENTS.md explains Pi is the coding-agent runtime.",
+        "AGENTS.md explains Kajiya Build Line deterministic workflow.",
+        "AGENTS.md explains upstream improvement protocol.",
+        "init-project blocks rather than overwrites existing AGENTS.md.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
