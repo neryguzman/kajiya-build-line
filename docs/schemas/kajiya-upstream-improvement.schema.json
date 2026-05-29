@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-upstream-improvement.schema.json",
+  "title": "Kajiya Upstream Improvement",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "created_at",
+    "updated_at",
+    "title",
+    "slug",
+    "source_project",
+    "target_project",
+    "problem",
+    "recommendation",
+    "evidence",
+    "target_files",
+    "validation_commands",
+    "status",
+    "next_steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.upstream_improvement.v1"
+    },
+    "kind": {
+      "const": "kajiya_upstream_improvement"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "problem": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recommendation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "target_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "validation_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "rejected", "implemented", "superseded"]
+    },
+    "next_steps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}
