@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-020",
+  "active_workstream": "upstream_improvement_proposal_command",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -32,7 +32,7 @@
     "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol.",
     "Completed KBL-019: fixed init-project so AGENTS.md is actually created, listed in created_files, and protected by no-overwrite conflicts."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-020: implement upstream-improvement command for child-repo framework improvement proposals.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

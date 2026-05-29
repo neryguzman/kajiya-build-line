@@ -867,6 +867,53 @@
       "evidence": [
         "docs/evidence/kbl-019-fix-agents-bootstrap-regression.md"
       ]
+    },
+    {
+      "issue_id": "KBL-020",
+      "title": "Add upstream improvement proposal command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "upstream_governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Child repositories can discover reusable improvements to Kajiya Build Line, but there is no deterministic command to record those improvements as upstream proposal artifacts for the main kajiya-build-line repository.",
+      "expected_behavior": "A deterministic command creates an upstream improvement proposal JSON artifact containing source project, title, problem, recommendation, evidence references, suggested target files, and validation commands.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/upstream_improvement.py.",
+        "Add CLI command: kajiya-build-line upstream-improvement.",
+        "Write proposals under docs/upstream-improvements/SLUG.json.",
+        "Support --title, --source-project, --problem, --recommendation, --evidence, --target-file, and --validation.",
+        "Return JSON-compatible output.",
+        "Do not modify source code beyond creating the proposal artifact.",
+        "Document that proposal artifacts can be used to open issues or PRs in the main kajiya-build-line repo."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/upstream_improvement.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/upstream-improvements/",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line upstream-improvement --title \"Fix AGENTS bootstrap regression\" --source-project kajiya-build-line --problem \"init-project had AGENTS generator but did not write AGENTS.md\" --recommendation \"Add AGENTS.md to planned_text_files and validate in temp repo\" --evidence docs/evidence/kbl-019-fix-agents-bootstrap-regression.md --target-file src/kajiya_build_line/init_project.py --validation \"kajiya-build-line qa\"",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "upstream-improvement command exists.",
+        "Command creates docs/upstream-improvements/SLUG.json.",
+        "Proposal records source project.",
+        "Proposal records problem and recommendation.",
+        "Proposal records evidence references.",
+        "Proposal records suggested target files.",
+        "Command returns JSON-compatible output.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
