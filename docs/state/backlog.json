@@ -1234,7 +1234,7 @@
     {
       "issue_id": "KBL-027",
       "title": "Add deterministic test scenario artifacts",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "qa_governance",
       "claim_status": "claimed",
@@ -1270,7 +1270,13 @@
         "QA passes.",
         "Evidence documents why generic QA was insufficient for KBL-025."
       ],
-      "created_at": "2026-05-30"
+      "created_at": "2026-05-30",
+      "completed_at": "2026-05-30",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-027-test-scenario-artifacts.md",
+        "docs/evidence/kbl-027-human-chat-contract-architecture.md"
+      ]
     }
   ]
 }
