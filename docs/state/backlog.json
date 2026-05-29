@@ -111,7 +111,7 @@
     {
       "issue_id": "KBL-004",
       "title": "Add deterministic status and QA commands",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P1",
       "type": "qa",
       "claim_status": "claimed",
@@ -134,15 +134,21 @@
         "Output is JSON-compatible."
       ],
       "claimed_by": "Nery + ChatGPT",
-      "branch": "main"
+      "branch": "main",
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "b3ccb18",
+      "evidence": [
+        "docs/evidence/kbl-004-onboarding-after-project-profile.md",
+        "docs/evidence/kbl-004-status-qa-commands.md"
+      ]
     },
     {
       "issue_id": "KBL-005",
       "title": "Design Builder as bounded Pi/Pocock reasoning step",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P1",
       "type": "builder",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "The project needs a Builder step that uses Pi/Pocock's configured model without adding a separate Gemini SDK client.",
       "expected_behavior": "The Builder receives a selected issue_id and local evidence, then returns a structured patch plan without modifying files.",
       "files_likely_to_change": [
@@ -158,7 +164,9 @@
         "Builder does not use Gemini SDK directly.",
         "Builder output has next_safe_actions.",
         "Builder cannot claim files changed unless a deterministic step changed them."
-      ]
+      ],
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main"
     }
   ]
 }

@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-004",
-  "active_workstream": "deterministic_status_and_qa_commands",
+  "active_issue_id": "KBL-005",
+  "active_workstream": "bounded_pi_pocock_builder_design",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -13,9 +13,10 @@
     "Formalized kajiya_onboard_project documentation.",
     "Completed KBL-001: project objective, backlog, current-project state, handoff protocol, and project-scope decision are committed and pushed.",
     "Completed KBL-002: /kajiya-onboard was verified through Pi, read local evidence, returned JSON-compatible output, and remained read-only.",
-    "Completed KBL-003: created .kajiya/project.json, JSON Schema, pi.dev documentation, and evidence for project profile initialization."
+    "Completed KBL-003: created .kajiya/project.json, JSON Schema, pi.dev documentation, and evidence for project profile initialization.",
+    "Completed KBL-004: implemented deterministic status and QA commands with JSON-compatible output."
   ],
-  "next_recommended_action": "Work on KBL-004: add deterministic status and QA commands that can run without LLM reasoning and report JSON-compatible output.",
+  "next_recommended_action": "Work on KBL-005: design Builder as a bounded Pi/Pocock reasoning step that requires selected issue_id and returns a structured patch plan without modifying files.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
