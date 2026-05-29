@@ -128,6 +128,8 @@ def close_issue(
             f"Work on {next_issue_id}: {activated.get('title', '').strip()}"
         )
     else:
+        current["active_issue_id"] = None
+        current["active_workstream"] = "backlog_selection"
         current["next_recommended_action"] = "Select the next backlog item."
 
     write_json(current_path, current)
