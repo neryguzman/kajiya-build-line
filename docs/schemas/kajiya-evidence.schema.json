@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-evidence.schema.json",
+  "title": "Kajiya Evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "ok",
+    "pi_dev_id",
+    "runtime_status",
+    "project_root",
+    "request",
+    "results",
+    "next_safe_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.evidence.v1"
+    },
+    "kind": {
+      "const": "kajiya_evidence"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "pi_dev_id": {
+      "const": "kajiya_evidence"
+    },
+    "runtime_status": {
+      "type": "string"
+    },
+    "project_root": {
+      "type": "string"
+    },
+    "request": {
+      "type": "object"
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "next_safe_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}

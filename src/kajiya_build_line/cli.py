@@ -7,6 +7,7 @@ from pathlib import Path
 from kajiya_build_line.project_detect import build_status_payload
 from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.backlog import close_issue
+from kajiya_build_line.evidence import build_evidence_payload
 
 
 def print_json(payload: dict) -> int:
@@ -20,6 +21,29 @@ def status() -> int:
 
 def qa() -> int:
     return print_json(build_qa_payload(Path.cwd()))
+
+
+def evidence_command(argv: list[str]) -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="kajiya-build-line evidence")
+    parser.add_argument("--read", action="append", default=[])
+    parser.add_argument("--list", action="append", default=[])
+    parser.add_argument("--grep", action="append", default=[])
+    parser.add_argument("--grep-path", default=".")
+    parser.add_argument("--git-log", type=int)
+
+    args = parser.parse_args(argv)
+
+    payload = build_evidence_payload(
+        root=Path.cwd(),
+        read_paths=args.read,
+        list_paths=args.list,
+        grep_patterns=args.grep,
+        grep_search_path=args.grep_path,
+        git_log_limit=args.git_log,
+    )
+    return print_json(payload)
 
 
 def close_issue_command(argv: list[str]) -> int:
@@ -49,7 +73,7 @@ def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
 
     if not argv or argv[0] in {"help", "--help", "-h"}:
-        print("Usage: kajiya-build-line status|qa|close-issue")
+        print("Usage: kajiya-build-line status|qa|close-issue|evidence")
         return 0
 
     command = argv[0]
@@ -60,11 +84,14 @@ def main(argv: list[str] | None = None) -> int:
     if command == "qa":
         return qa()
 
+    if command == "evidence":
+        return evidence_command(argv[1:])
+
     if command == "close-issue":
         return close_issue_command(argv[1:])
 
     print(f"Unknown command: {command}", file=sys.stderr)
-    print("Usage: kajiya-build-line status|qa|close-issue", file=sys.stderr)
+    print("Usage: kajiya-build-line status|qa|close-issue|evidence", file=sys.stderr)
     return 2
 
 
