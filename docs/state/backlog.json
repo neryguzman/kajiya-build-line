@@ -525,7 +525,7 @@
     {
       "issue_id": "KBL-013",
       "title": "Add next command for operator guidance",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "operator_experience",
       "claim_status": "claimed",
@@ -565,6 +565,11 @@
         "next is read-only.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-013-operator-next-command.md"
       ]
     }
   ]

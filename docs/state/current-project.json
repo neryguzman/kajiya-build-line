@@ -23,9 +23,10 @@
     "Completed KBL-010: refactored CLI routing to argparse subparsers while preserving existing command behavior.",
     "Completed KBL-011: added JSON Schema validation as a standard QA gate.",
     "Completed KBL-011: added JSON Schema validation as a standard QA gate.",
-    "Completed KBL-012: implemented compact operator status summary command."
+    "Completed KBL-012: implemented compact operator status summary command.",
+    "Completed KBL-013: implemented compact operator next-action command."
   ],
-  "next_recommended_action": "Work on KBL-013: implement kajiya-build-line next for compact operator guidance.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
