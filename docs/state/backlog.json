@@ -1021,6 +1021,54 @@
       "evidence": [
         "docs/evidence/kbl-022-deterministic-backlog-orientation.md"
       ]
+    },
+    {
+      "issue_id": "KBL-023",
+      "title": "Add deterministic add-issue command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "backlog_governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Creating new backlog items still depends on long pasted Python heredocs. This makes the workflow fragile and prevents Pi, ChatGPT, and the human operator from using schema-shaped backlog creation cleanly.",
+      "expected_behavior": "A deterministic add-issue command creates a new backlog item from explicit arguments, updates current-project state when requested, and returns JSON-compatible output.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/add_issue.py.",
+        "Add CLI command: kajiya-build-line add-issue.",
+        "Support --issue-id, --title, --priority, --type, --problem, --expected-behavior, --proposed-change, --file, --validation, --close-criterion.",
+        "Support --activate to mark the new issue as in_progress and update current-project active_issue_id.",
+        "Prevent duplicate issue IDs.",
+        "Write only docs/state/backlog.json and docs/state/current-project.json.",
+        "Return JSON-compatible output.",
+        "Document that ChatGPT/human can produce perfect arguments or JSON-shaped fields while Pi executes deterministically."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/add_issue.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line add-issue --help",
+        "kajiya-build-line backlog",
+        "kajiya-build-line next",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "add-issue command exists.",
+        "Command can create a backlog item without Python heredoc.",
+        "Command prevents duplicate issue IDs.",
+        "Command can activate the newly created issue.",
+        "Command updates backlog and current-project deterministically.",
+        "Command returns JSON-compatible output.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }

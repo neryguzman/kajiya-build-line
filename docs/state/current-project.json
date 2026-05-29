@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-023",
+  "active_workstream": "deterministic_add_issue_command",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -35,7 +35,7 @@
     "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts.",
     "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-023: implement kajiya-build-line add-issue to create backlog items without heredocs.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
