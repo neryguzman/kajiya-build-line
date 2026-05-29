@@ -1,0 +1,36 @@
+{
+  "schema_version": "kajiya.current_project.v1",
+  "project_id": "kajiya-build-line",
+  "updated_at": "2026-05-29",
+  "active_issue_id": "KBL-001",
+  "active_workstream": "project_governance_bootstrap",
+  "last_completed": [
+    "Created local repository.",
+    "Pushed main branch to GitHub origin.",
+    "Added Python CLI skeleton.",
+    "Added local Pi extension.",
+    "Confirmed Pi loads kajiya-build-line.ts.",
+    "Formalized kajiya_onboard_project documentation."
+  ],
+  "next_recommended_action": "Commit and push project objective, backlog, current-project, handoff protocol, and project-scope decision.",
+  "resume_reading_order": [
+    "README.md",
+    "docs/state/current-project.json",
+    "docs/state/backlog.json",
+    "docs/LLM_HANDOFF_PROTOCOL.md",
+    "docs/decisions/0001-project-scope.md",
+    "git --no-pager log --oneline -12"
+  ],
+  "validation_commands": [
+    "git --no-pager diff --check",
+    "python -m compileall src"
+  ],
+  "safety_constraints": [
+    "Do not rely on chat memory.",
+    "Do not add Gemini SDK unless a backlog item explicitly approves it.",
+    "Use Pi/Pocock as the LLM runtime.",
+    "Keep Kajiya Build Line separate from Kajiya Context Engine.",
+    "Onboarding is read-only.",
+    "Local writes require explicit human confirmation."
+  ]
+}

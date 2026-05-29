@@ -1,0 +1,146 @@
+{
+  "schema_version": "kajiya.backlog.v1",
+  "project_id": "kajiya-build-line",
+  "updated_at": "2026-05-29",
+  "source_of_truth": "docs/state/backlog.json",
+  "rules": [
+    "Backlog is required before meaningful implementation.",
+    "Every meaningful code, docs, extension, or workflow change must map to an issue_id.",
+    "Builder may reason, but must not modify files without explicit human approval.",
+    "QA and validation must be deterministic whenever possible.",
+    "Project-specific memory must live in the target project, not globally in Kajiya Build Line."
+  ],
+  "items": [
+    {
+      "issue_id": "KBL-001",
+      "title": "Define project vision, backlog, and handoff protocol",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The repository exists and has an initial Pi extension, but it needs a canonical objective, backlog, and handoff protocol so work can resume without relying on chat memory.",
+      "expected_behavior": "A new session can read README.md, docs/state/backlog.json, docs/state/current-project.json, and docs/LLM_HANDOFF_PROTOCOL.md to understand the project and next safe actions.",
+      "files_likely_to_change": [
+        "README.md",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json",
+        "docs/LLM_HANDOFF_PROTOCOL.md",
+        "docs/decisions/0001-project-scope.md"
+      ],
+      "validation_commands": [
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "README explains the project purpose and relationship to Kajiya Context Engine.",
+        "Backlog exists and includes initial KBL issues.",
+        "Handoff protocol exists.",
+        "Current project state exists.",
+        "Changes are committed and pushed."
+      ]
+    },
+    {
+      "issue_id": "KBL-002",
+      "title": "Formalize kajiya_onboard_project as the first read-only pi.dev",
+      "status": "open",
+      "priority": "P0",
+      "type": "pi_dev",
+      "claim_status": "unclaimed",
+      "problem": "The local Pi extension can inject an onboarding prompt, but the onboarding station needs to be formalized as the first permanent pi.dev-style step.",
+      "expected_behavior": "Running /kajiya-onboard in Pi starts a read-only project discovery step that inspects the current repo and returns JSON-compatible readiness output.",
+      "files_likely_to_change": [
+        ".pi/extensions/kajiya-build-line.ts",
+        "docs/pi-devs/kajiya_onboard_project.md",
+        "README.md"
+      ],
+      "validation_commands": [
+        "git --no-pager diff --check",
+        "pi"
+      ],
+      "close_criteria": [
+        "Pi loads the extension.",
+        "/kajiya-onboard executes successfully.",
+        "The onboarding prompt does not assume any specific project.",
+        "The station is read-only."
+      ]
+    },
+    {
+      "issue_id": "KBL-003",
+      "title": "Add project profile initialization with explicit confirmation",
+      "status": "open",
+      "priority": "P0",
+      "type": "local_write_guarded",
+      "claim_status": "unclaimed",
+      "problem": "Kajiya Build Line needs a way to initialize project-local identity without contaminating global memory.",
+      "expected_behavior": "A confirmed init step creates .kajiya/project.json with project-local paths, validation commands, memory policy, and external write policy.",
+      "files_likely_to_change": [
+        "docs/schemas/kajiya-project.schema.json",
+        "docs/pi-devs/kajiya_init_project_profile.md",
+        "src/kajiya_build_line/cli.py",
+        ".pi/extensions/kajiya-build-line.ts"
+      ],
+      "validation_commands": [
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "Init is separate from onboarding.",
+        "Init requires explicit human approval.",
+        "Generated profile contains no machine-specific secrets.",
+        "Profile is portable across computers."
+      ]
+    },
+    {
+      "issue_id": "KBL-004",
+      "title": "Add deterministic status and QA commands",
+      "status": "open",
+      "priority": "P1",
+      "type": "qa",
+      "claim_status": "unclaimed",
+      "problem": "The build line needs deterministic checks before and after Builder-assisted work.",
+      "expected_behavior": "Commands can inspect git status, compile Python sources, check expected files, and report JSON without LLM reasoning.",
+      "files_likely_to_change": [
+        "src/kajiya_build_line/cli.py",
+        "src/kajiya_build_line/project_detect.py",
+        "src/kajiya_build_line/qa.py"
+      ],
+      "validation_commands": [
+        "kajiya-build-line status",
+        "python -m compileall src",
+        "git --no-pager diff --check"
+      ],
+      "close_criteria": [
+        "Status works from this repo.",
+        "Status works from an external git repo.",
+        "QA is read-only and deterministic.",
+        "Output is JSON-compatible."
+      ]
+    },
+    {
+      "issue_id": "KBL-005",
+      "title": "Design Builder as bounded Pi/Pocock reasoning step",
+      "status": "open",
+      "priority": "P1",
+      "type": "builder",
+      "claim_status": "unclaimed",
+      "problem": "The project needs a Builder step that uses Pi/Pocock's configured model without adding a separate Gemini SDK client.",
+      "expected_behavior": "The Builder receives a selected issue_id and local evidence, then returns a structured patch plan without modifying files.",
+      "files_likely_to_change": [
+        "docs/pi-devs/kajiya_builder_patch_plan.md",
+        ".pi/extensions/kajiya-build-line.ts",
+        "README.md"
+      ],
+      "validation_commands": [
+        "git --no-pager diff --check"
+      ],
+      "close_criteria": [
+        "Builder does not run before backlog issue selection.",
+        "Builder does not use Gemini SDK directly.",
+        "Builder output has next_safe_actions.",
+        "Builder cannot claim files changed unless a deterministic step changed them."
+      ]
+    }
+  ]
+}
