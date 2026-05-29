@@ -1,17 +1,19 @@
 // Kajiya Build Line local Pi extension.
-// This extension is portable: it must inspect the current working directory
-// and must not hard-code any project-specific memory.
+// Portable rule: inspect the current working directory and never hard-code
+// project-specific memory.
 
-export default function extension(api: any) {
-  api.commands.register({
-    name: "kajiya-build-line",
-    description: "Inspect current repo and start a Kajiya backlog-governed build-line planning turn.",
-    handler: async () => {
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+
+export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
+  pi.registerCommand("kajiya-build-line", {
+    description: "Start a Kajiya backlog-governed build-line planning turn.",
+    handler: async (_args, ctx) => {
       const prompt = `
 You are running Kajiya Build Line inside Pi.
 
 Do not rely on previous chat memory.
 Inspect the current working directory as the project root.
+
 Before proposing implementation, gather evidence from local files where present:
 
 1. .kajiya/project.json
@@ -39,7 +41,12 @@ Rules:
 - If no backlog exists, recommend initializing one.
 - If a backlog exists, identify candidate issue_ids but require human selection before implementation.
 `;
-      await api.chat.send(prompt);
+
+      ctx.ui.notify("Kajiya Build Line prompt injected. The model should inspect the current repo before proposing work.", "info");
+
+      // We use prompt injection into the chat turn rather than direct shell work.
+      // The LLM runtime remains Pi/Pocock; this extension is only the handler.
+      await ctx.sessionManager.addUserMessage?.(prompt);
     },
   });
 }
