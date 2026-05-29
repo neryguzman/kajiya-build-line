@@ -145,10 +145,10 @@
     {
       "issue_id": "KBL-005",
       "title": "Design Builder as bounded Pi/Pocock reasoning step",
-      "status": "in_progress",
+      "status": "open",
       "priority": "P1",
       "type": "builder",
-      "claim_status": "claimed",
+      "claim_status": "unclaimed",
       "problem": "The project needs a Builder step that uses Pi/Pocock's configured model without adding a separate Gemini SDK client.",
       "expected_behavior": "The Builder receives a selected issue_id and local evidence, then returns a structured patch plan without modifying files.",
       "files_likely_to_change": [
@@ -171,10 +171,10 @@
     {
       "issue_id": "KBL-006",
       "title": "Add deterministic issue transition and close command",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P0",
       "type": "backlog_governance",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "Issue closure and workstream transitions are currently performed with long ad-hoc Python snippets pasted into the terminal, which is not replicable or aligned with Kajiya Build Line.",
       "expected_behavior": "A deterministic command can close one backlog issue, attach evidence, activate the next issue, update current-project state, and return JSON-compatible output.",
       "proposed_change": [
@@ -206,7 +206,9 @@
         "current-project active_issue_id updates correctly.",
         "Command returns JSON-compatible output.",
         "QA passes after transition."
-      ]
+      ],
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main"
     }
   ]
 }
