@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-010",
-  "active_workstream": "argparse_subparser_cli_routing",
+  "active_issue_id": "KBL-011",
+  "active_workstream": "qa_schema_validation_gate",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -22,7 +22,7 @@
     "Completed KBL-009: implemented deterministic JSON Schema validation command.",
     "Completed KBL-010: refactored CLI routing to argparse subparsers while preserving existing command behavior."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-011: include validate-json as a standard kajiya-build-line qa check.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

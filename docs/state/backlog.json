@@ -425,6 +425,46 @@
       "evidence": [
         "docs/evidence/kbl-010-cli-subparser-routing.md"
       ]
+    },
+    {
+      "issue_id": "KBL-011",
+      "title": "Add JSON Schema validation into QA",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "qa_schema_validation",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The validate-json command exists and passes, but kajiya-build-line qa does not yet run schema validation as part of the standard deterministic QA gate.",
+      "expected_behavior": "Running kajiya-build-line qa includes JSON Schema validation and fails if validate-json fails.",
+      "proposed_change": [
+        "Update src/kajiya_build_line/qa.py to call build_validation_payload.",
+        "Add a json_schema_validation check to QA output.",
+        "Preserve existing git_diff_check and python_compileall_src checks.",
+        "Ensure qa returns ok false if schema validation fails.",
+        "Do not change validate-json behavior."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/qa.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "kajiya-build-line status",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "QA output includes json_schema_validation check.",
+        "QA passes when validate-json passes.",
+        "QA fails if schema validation fails.",
+        "Existing QA checks still run.",
+        "validate-json still works independently.",
+        "Command output remains JSON-compatible."
+      ]
     }
   ]
 }
