@@ -9,6 +9,7 @@ from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.evidence import build_evidence_payload
 from kajiya_build_line.task_brief import create_task_brief
+from kajiya_build_line.validate_json import build_validation_payload
 
 
 def print_json(payload: dict) -> int:
@@ -99,7 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
 
     if not argv or argv[0] in {"help", "--help", "-h"}:
-        print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief")
+        print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief|validate-json")
         return 0
 
     command = argv[0]
@@ -120,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
         return close_issue_command(argv[1:])
 
     print(f"Unknown command: {command}", file=sys.stderr)
-    print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief", file=sys.stderr)
+    print("Usage: kajiya-build-line status|qa|close-issue|evidence|task-brief|validate-json", file=sys.stderr)
     return 2
 
 

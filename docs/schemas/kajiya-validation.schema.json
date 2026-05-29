@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-validation.schema.json",
+  "title": "Kajiya JSON Validation Result",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "ok",
+    "pi_dev_id",
+    "runtime_status",
+    "project_root",
+    "validated",
+    "next_safe_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.validation.v1"
+    },
+    "kind": {
+      "const": "kajiya_validation"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "pi_dev_id": {
+      "const": "kajiya_validate_json"
+    },
+    "runtime_status": {
+      "type": "string"
+    },
+    "project_root": {
+      "type": "string"
+    },
+    "validated": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "next_safe_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}
