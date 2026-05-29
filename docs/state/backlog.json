@@ -167,6 +167,46 @@
       ],
       "claimed_by": "Nery + ChatGPT",
       "branch": "main"
+    },
+    {
+      "issue_id": "KBL-006",
+      "title": "Add deterministic issue transition and close command",
+      "status": "open",
+      "priority": "P0",
+      "type": "backlog_governance",
+      "claim_status": "unclaimed",
+      "problem": "Issue closure and workstream transitions are currently performed with long ad-hoc Python snippets pasted into the terminal, which is not replicable or aligned with Kajiya Build Line.",
+      "expected_behavior": "A deterministic command can close one backlog issue, attach evidence, activate the next issue, update current-project state, and return JSON-compatible output.",
+      "proposed_change": [
+        "Add docs/pi-devs/kajiya_issue_transition.md.",
+        "Add CLI command: kajiya-build-line close-issue.",
+        "Support --issue-id, --next-issue-id, --evidence, and --completion-note.",
+        "Update docs/state/backlog.json and docs/state/current-project.json deterministically.",
+        "Return JSON-compatible output.",
+        "Require explicit operator invocation."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/cli.py",
+        "src/kajiya_build_line/backlog.py",
+        "docs/pi-devs/kajiya_issue_transition.md",
+        "docs/schemas/kajiya-issue-transition.schema.json",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line status",
+        "kajiya-build-line qa",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "A backlog issue can be closed without a custom pasted Python script.",
+        "The next issue can be activated deterministically.",
+        "Evidence paths can be attached to the closed issue.",
+        "current-project active_issue_id updates correctly.",
+        "Command returns JSON-compatible output.",
+        "QA passes after transition."
+      ]
     }
   ]
 }
