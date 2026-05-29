@@ -919,6 +919,47 @@
       "evidence": [
         "docs/evidence/kbl-020-upstream-improvement-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-021",
+      "title": "Add schema validation for upstream improvement artifacts",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "schema_validation",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "KBL-020 added durable upstream improvement proposal JSON artifacts, but validate-json does not yet validate them against a schema.",
+      "expected_behavior": "A JSON Schema validates upstream improvement proposal artifacts and kajiya-build-line validate-json includes docs/upstream-improvements/*.json.",
+      "proposed_change": [
+        "Add docs/schemas/kajiya-upstream-improvement.schema.json.",
+        "Update src/kajiya_build_line/validate_json.py to validate docs/upstream-improvements/*.json.",
+        "Ensure docs/upstream-improvements/fix-agents-bootstrap-regression.json validates.",
+        "Keep validate-json deterministic and read-only.",
+        "Ensure qa includes the updated JSON validation gate."
+      ],
+      "files_likely_to_change": [
+        "docs/schemas/kajiya-upstream-improvement.schema.json",
+        "src/kajiya_build_line/validate_json.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line validate-json",
+        "kajiya-build-line qa",
+        "kajiya-build-line upstream-improvement --title \"Fix AGENTS bootstrap regression\" --source-project kajiya-build-line --problem \"init-project had AGENTS generator but did not write AGENTS.md\" --recommendation \"Add AGENTS.md to planned_text_files and validate in temp repo\" --evidence docs/evidence/kbl-019-fix-agents-bootstrap-regression.md --target-file src/kajiya_build_line/init_project.py --validation \"kajiya-build-line qa\"",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "Schema for kajiya.upstream_improvement.v1 exists.",
+        "validate-json validates upstream improvement proposal artifacts.",
+        "Existing proposal validates successfully.",
+        "validate-json still validates project profile and task brief.",
+        "qa passes with json_schema_validation.",
+        "Command output remains JSON-compatible."
+      ]
     }
   ]
 }
