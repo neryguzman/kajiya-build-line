@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from kajiya_build_line.backlog import close_issue
+from kajiya_build_line.bootstrap_check import build_bootstrap_check_payload
 from kajiya_build_line.evidence import build_evidence_payload
 from kajiya_build_line.init_project import init_project
 from kajiya_build_line.project_detect import build_status_payload
@@ -20,6 +21,10 @@ from kajiya_build_line.validate_json import build_validation_payload
 def print_json(payload: dict[str, Any]) -> int:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0 if payload.get("ok") else 1
+
+
+def handle_bootstrap_check(args: argparse.Namespace) -> int:
+    return print_json(build_bootstrap_check_payload(Path.cwd()))
 
 
 def handle_init_project(args: argparse.Namespace) -> int:
@@ -97,6 +102,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    bootstrap_check_parser = subparsers.add_parser("bootstrap-check", help="Check whether the current repo has Kajiya Build Line files.")
+    bootstrap_check_parser.set_defaults(handler=handle_bootstrap_check)
 
     init_project_parser = subparsers.add_parser("init-project", help="Bootstrap Kajiya Build Line files into the current repo.")
     init_project_parser.add_argument("--project-id", required=True)
