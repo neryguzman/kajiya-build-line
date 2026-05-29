@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-002",
-  "active_workstream": "formalize_onboarding_pidev",
+  "active_issue_id": "KBL-003",
+  "active_workstream": "project_profile_initialization",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -11,9 +11,10 @@
     "Added local Pi extension.",
     "Confirmed Pi loads kajiya-build-line.ts.",
     "Formalized kajiya_onboard_project documentation.",
-    "Completed KBL-001: project objective, backlog, current-project state, handoff protocol, and project-scope decision are committed and pushed."
+    "Completed KBL-001: project objective, backlog, current-project state, handoff protocol, and project-scope decision are committed and pushed.",
+    "Completed KBL-002: /kajiya-onboard was verified through Pi, read local evidence, returned JSON-compatible output, and remained read-only."
   ],
-  "next_recommended_action": "Work on KBL-002: verify /kajiya-onboard behavior, document output evidence, and stabilize kajiya_onboard_project as the first read-only pi.dev.",
+  "next_recommended_action": "Work on KBL-003: define and create .kajiya/project.json through an explicit local-write initialization step.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

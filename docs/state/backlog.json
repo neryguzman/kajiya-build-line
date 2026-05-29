@@ -46,7 +46,7 @@
     {
       "issue_id": "KBL-002",
       "title": "Formalize kajiya_onboard_project as the first read-only pi.dev",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "pi_dev",
       "claim_status": "claimed",
@@ -68,15 +68,20 @@
         "The station is read-only."
       ],
       "claimed_by": "Nery + ChatGPT",
-      "branch": "main"
+      "branch": "main",
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "541a738",
+      "evidence": [
+        "docs/evidence/kbl-002-onboarding-pi-test.md"
+      ]
     },
     {
       "issue_id": "KBL-003",
       "title": "Add project profile initialization with explicit confirmation",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P0",
       "type": "local_write_guarded",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "Kajiya Build Line needs a way to initialize project-local identity without contaminating global memory.",
       "expected_behavior": "A confirmed init step creates .kajiya/project.json with project-local paths, validation commands, memory policy, and external write policy.",
       "files_likely_to_change": [
@@ -94,7 +99,9 @@
         "Init requires explicit human approval.",
         "Generated profile contains no machine-specific secrets.",
         "Profile is portable across computers."
-      ]
+      ],
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main"
     },
     {
       "issue_id": "KBL-004",
