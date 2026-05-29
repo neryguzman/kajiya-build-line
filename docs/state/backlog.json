@@ -718,6 +718,49 @@
         "QA passes.",
         "validate-json passes."
       ]
+    },
+    {
+      "issue_id": "KBL-017",
+      "title": "Document Pi runtime boundary and Kajiya Build Line differentiation",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "architecture_decision",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line is built on top of Pi/Pocock, but the repository does not yet clearly document how it differs from Pi coding-agent docs and why Pi remains the selected coding agent runtime.",
+      "expected_behavior": "A decision document explains that Pi is the interactive coding-agent runtime while Kajiya Build Line is the deterministic project governance layer for backlog, evidence, task briefs, JSON schemas, QA, and portable project memory.",
+      "proposed_change": [
+        "Add docs/decisions/0003-pi-runtime-boundary.md.",
+        "Document what Pi provides: coding agent runtime, extensions, skills, prompt templates, packages, JSON/RPC mode.",
+        "Document what Kajiya Build Line provides: deterministic project-local state, schemas, backlog, evidence, task briefs, QA, close-issue, bootstrap.",
+        "Document future regenerative-agent/lambda concept with safety constraints.",
+        "Document that self-modification must be bounded by task brief, allowed files, QA, JSON Schema, diff review, and git commit.",
+        "Document why Datomic-style JSON modeling matters for future migration and agent-safe memory."
+      ],
+      "files_likely_to_change": [
+        "docs/decisions/0003-pi-runtime-boundary.md",
+        "README.md",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "Decision document exists.",
+        "Decision clearly states Pi is the selected coding agent runtime.",
+        "Decision clearly states Kajiya Build Line is not replacing Pi.",
+        "Decision explains deterministic layer vs LLM reasoning layer.",
+        "Decision documents regenerative/self-modifying agent boundary.",
+        "Decision mentions JSON Schema and Datomic-style modeling rationale.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
