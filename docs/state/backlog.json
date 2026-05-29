@@ -775,7 +775,7 @@
     {
       "issue_id": "KBL-018",
       "title": "Add AGENTS.md and upstream improvement protocol to project bootstrap",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "portable_governance",
       "claim_status": "claimed",
@@ -814,6 +814,11 @@
         "init-project blocks rather than overwrites existing AGENTS.md.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-018-agents-bootstrap-protocol.md"
       ]
     }
   ]
