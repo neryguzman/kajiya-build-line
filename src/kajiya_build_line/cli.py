@@ -24,6 +24,10 @@ def status() -> int:
 def qa() -> int:
     return print_json(build_qa_payload(Path.cwd()))
 
+def validate_json_command(argv: list[str]) -> int:
+    payload = build_validation_payload(Path.cwd())
+    return print_json(payload)
+
 
 def task_brief_command(argv: list[str]) -> int:
     import argparse
@@ -110,6 +114,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if command == "qa":
         return qa()
+
+    if command == "validate-json":
+        return validate_json_command(argv[1:])
 
     if command == "task-brief":
         return task_brief_command(argv[1:])
