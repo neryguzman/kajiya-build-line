@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from kajiya_build_line.add_issue import add_issue
+from kajiya_build_line.adopt_project import build_adopt_project_payload
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.backlog_orient import build_backlog_orientation_payload
 from kajiya_build_line.bootstrap_check import build_bootstrap_check_payload
@@ -26,6 +27,10 @@ from kajiya_build_line.validate_json import build_validation_payload
 def print_json(payload: dict[str, Any]) -> int:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0 if payload.get("ok") else 1
+
+
+def handle_adopt_project(args: argparse.Namespace) -> int:
+    return print_json(build_adopt_project_payload(Path.cwd()))
 
 
 def handle_add_issue(args: argparse.Namespace) -> int:
@@ -154,6 +159,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    adopt_project_parser = subparsers.add_parser(
+        "adopt-project",
+        help="Inspect a mature existing repository for Kajiya Build Line adoption.",
+    )
+    adopt_project_parser.set_defaults(handler=handle_adopt_project)
 
     add_issue_parser = subparsers.add_parser(
         "add-issue",
