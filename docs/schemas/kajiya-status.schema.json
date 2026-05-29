@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-status.schema.json",
+  "title": "Kajiya Build Line Status",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "ok",
+    "pi_dev_id",
+    "runtime_status",
+    "project_root",
+    "missing_evidence",
+    "next_safe_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.status.v1"
+    },
+    "kind": {
+      "const": "kajiya_status"
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "pi_dev_id": {
+      "const": "kajiya_status"
+    },
+    "runtime_status": {
+      "type": "string"
+    },
+    "project_root": {
+      "type": "string"
+    },
+    "project_profile": {
+      "type": ["object", "null"]
+    },
+    "current_project": {
+      "type": ["object", "null"]
+    },
+    "backlog_summary": {
+      "type": ["object", "null"]
+    },
+    "git": {
+      "type": ["object", "null"]
+    },
+    "missing_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "next_safe_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}
