@@ -1069,6 +1069,46 @@
         "QA passes.",
         "validate-json passes."
       ]
+    },
+    {
+      "issue_id": "KBL-024",
+      "title": "Add deterministic checkpoint commit and push command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "git_governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Commits and pushes are still performed manually, which means the relationship between backlog issue, evidence, validation, commit hash, and push state is not captured deterministically.",
+      "expected_behavior": "A deterministic checkpoint command verifies QA and validation, records evidence, creates a git commit tied to an issue, optionally pushes, and returns JSON-compatible output with the commit hash.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/checkpoint.py.",
+        "Add CLI command: kajiya-build-line checkpoint.",
+        "Support --issue-id, --message, --evidence, --file, and --push.",
+        "Run kajiya-build-line qa before commit.",
+        "Run kajiya-build-line validate-json before commit.",
+        "Return commit hash and pushed status."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/checkpoint.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/"
+      ],
+      "validation_commands": [
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "checkpoint command exists.",
+        "checkpoint runs QA before committing.",
+        "checkpoint runs validate-json before committing.",
+        "checkpoint creates a commit tied to an issue id.",
+        "checkpoint returns JSON-compatible output with commit hash.",
+        "checkpoint optionally pushes when --push is provided."
+      ],
+      "created_at": "2026-05-30"
     }
   ]
 }
