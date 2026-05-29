@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
-  "active_issue_id": "KBL-026",
-  "active_workstream": "pi_extension_boundary",
+  "active_issue_id": "KBL-025",
+  "active_workstream": "backlog_governance",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -35,9 +35,10 @@
     "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts.",
     "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy.",
     "Completed KBL-023: implemented deterministic add-issue command and verified it by creating and activating KBL-024 without heredocs.",
-    "Completed KBL-024: implemented read-only checkpoint orientation command for deterministic human/chat decision packets."
+    "Completed KBL-024: implemented read-only checkpoint orientation command for deterministic human/chat decision packets.",
+    "Completed KBL-026: added /kajiya-builder-context semantics and /kajiya-builder-implement bounded implementation launcher."
   ],
-  "next_recommended_action": "Work on KBL-026: Rename builder plan command to builder context",
+  "next_recommended_action": "Work on KBL-025: Add JSON file input support to add-issue",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

@@ -1186,7 +1186,7 @@
     {
       "issue_id": "KBL-026",
       "title": "Rename builder plan command to builder context",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "pi_extension_boundary",
       "claim_status": "claimed",
@@ -1219,7 +1219,12 @@
         "QA passes.",
         "validate-json passes."
       ],
-      "created_at": "2026-05-30"
+      "created_at": "2026-05-30",
+      "completed_at": "2026-05-30",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-026-builder-context-and-implement-commands.md"
+      ]
     }
   ]
 }
