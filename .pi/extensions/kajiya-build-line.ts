@@ -4,17 +4,21 @@
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
-  pi.registerCommand("kajiya-build-line", {
-    description: "Start a Kajiya backlog-governed build-line planning turn.",
-    handler: async (_args, ctx) => {
-      const prompt = `
-You are running Kajiya Build Line inside Pi.
+function onboardingPrompt(): string {
+  return `
+You are executing pi.dev kajiya_onboard_project inside Kajiya Build Line.
 
-Do not rely on previous chat memory.
+Role:
+- Discover the current repository.
+- Determine whether it is ready for backlog-governed work.
+- Do not modify files.
+- Do not create code.
+- Do not rely on previous chat memory.
+- Do not assume this is kajiya-context-engine.
+
 Inspect the current working directory as the project root.
 
-Before proposing implementation, gather evidence from local files where present:
+Gather evidence from local files/commands where present:
 
 1. .kajiya/project.json
 2. docs/state/current-project.json
@@ -23,8 +27,9 @@ Before proposing implementation, gather evidence from local files where present:
 5. git status --short
 6. git --no-pager log --oneline -12
 
-Then report JSON-compatible output with:
+Return JSON-compatible output with:
 - ok
+- pi_dev_id: "kajiya_onboard_project"
 - runtime_status
 - project_root
 - evidence_read
@@ -34,19 +39,33 @@ Then report JSON-compatible output with:
 - next_safe_actions
 
 Rules:
-- Do not modify files.
-- Do not create code yet.
-- Do not use global memory.
-- Do not assume this is kajiya-context-engine.
+- Read-only.
+- No file modifications.
+- No external writes.
+- No global/project-crossing memory.
 - If no backlog exists, recommend initializing one.
 - If a backlog exists, identify candidate issue_ids but require human selection before implementation.
+- If project identity is missing, recommend initialize_project_profile.
 `;
+}
 
-      ctx.ui.notify("Kajiya Build Line prompt injected. The model should inspect the current repo before proposing work.", "info");
+export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
+  const registerOnboard = (name: string) => {
+    pi.registerCommand(name, {
+      description: "Run Kajiya Build Line project onboarding/readiness discovery.",
+      handler: async (_args, ctx) => {
+        const prompt = onboardingPrompt();
 
-      // We use prompt injection into the chat turn rather than direct shell work.
-      // The LLM runtime remains Pi/Pocock; this extension is only the handler.
-      await ctx.sessionManager.addUserMessage?.(prompt);
-    },
-  });
+        ctx.ui.notify(
+          "Running kajiya_onboard_project. Read-only repo discovery prompt injected.",
+          "info"
+        );
+
+        await ctx.sessionManager.addUserMessage?.(prompt);
+      },
+    });
+  };
+
+  registerOnboard("kajiya-onboard");
+  registerOnboard("kajiya-build-line");
 }

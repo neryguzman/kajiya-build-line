@@ -6,3 +6,5 @@ __pycache__/
 .DS_Store
 .kajiya/local/
 .kajiya/cache/
+*.egg-info/
+src/*.egg-info/
