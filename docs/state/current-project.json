@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-013",
-  "active_workstream": "operator_next_action_command",
+  "active_issue_id": "KBL-014",
+  "active_workstream": "clear_active_issue_on_close_without_next",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -26,7 +26,7 @@
     "Completed KBL-012: implemented compact operator status summary command.",
     "Completed KBL-013: implemented compact operator next-action command."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-014: clear active_issue_id when close-issue is called without a next issue.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

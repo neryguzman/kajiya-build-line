@@ -571,6 +571,48 @@
       "evidence": [
         "docs/evidence/kbl-013-operator-next-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-014",
+      "title": "Clear active issue when closing without next issue",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "operator_state_consistency",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "After closing an issue without --next-issue-id, current-project still reports the closed issue as active_issue_id while next_recommended_action says to select the next backlog item.",
+      "expected_behavior": "When close-issue is called without --next-issue-id, current-project active_issue_id is cleared and active_workstream reflects backlog selection mode.",
+      "proposed_change": [
+        "Update src/kajiya_build_line/backlog.py close_issue behavior.",
+        "If next_issue_id is omitted, set current-project active_issue_id to null.",
+        "Set active_workstream to backlog_selection.",
+        "Keep next_recommended_action as Select the next backlog item.",
+        "Preserve existing behavior when next_issue_id is provided.",
+        "Return JSON-compatible output."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/backlog.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line next",
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "close-issue clears active_issue_id when no next_issue_id is provided.",
+        "summary shows active_issue_id null after closing with no next issue.",
+        "next shows select_backlog_item mode after closing with no next issue.",
+        "Existing next_issue_id activation behavior remains intact.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
