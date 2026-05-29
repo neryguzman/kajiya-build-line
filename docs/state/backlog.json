@@ -672,6 +672,52 @@
       "evidence": [
         "docs/evidence/kbl-015-init-project-bootstrap.md"
       ]
+    },
+    {
+      "issue_id": "KBL-016",
+      "title": "Add bootstrap-check command for repo readiness detection",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "portable_bootstrap",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Before running init-project in another repository, the operator needs a read-only command that detects whether the repo is already initialized or missing Kajiya Build Line files.",
+      "expected_behavior": "A deterministic bootstrap-check command inspects the current repository and reports initialized status, present files, missing files, conflicts, and recommended next action.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/bootstrap_check.py.",
+        "Add CLI command: kajiya-build-line bootstrap-check.",
+        "Check required files without modifying anything.",
+        "Return JSON-compatible output.",
+        "Recommend init-project when required files are missing.",
+        "Recommend normal next/summary flow when initialized."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/bootstrap_check.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line bootstrap-check",
+        "kajiya-build-line init-project --help",
+        "kajiya-build-line next",
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "bootstrap-check command exists.",
+        "bootstrap-check is read-only.",
+        "bootstrap-check reports initialized true in this repo.",
+        "bootstrap-check reports missing files in an uninitialized temp repo.",
+        "bootstrap-check returns JSON-compatible output.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
