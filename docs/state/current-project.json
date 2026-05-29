@@ -33,7 +33,8 @@
     "Completed KBL-019: fixed init-project so AGENTS.md is actually created, listed in created_files, and protected by no-overwrite conflicts.",
     "Completed KBL-020: implemented upstream-improvement command for reusable framework improvement proposals from child repos.",
     "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts.",
-    "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy."
+    "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy.",
+    "Completed KBL-023: implemented deterministic add-issue command and verified it by creating and activating KBL-024 without heredocs."
   ],
   "next_recommended_action": "Work on KBL-024: Add deterministic checkpoint commit and push command",
   "resume_reading_order": [
