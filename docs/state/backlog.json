@@ -521,6 +521,51 @@
       "evidence": [
         "docs/evidence/kbl-012-compact-summary-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-013",
+      "title": "Add next command for operator guidance",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "operator_experience",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line can show compact summary, but the operator still needs a direct command that answers what to do next without reading full status output.",
+      "expected_behavior": "A deterministic next command returns the current recommended operator action, active issue if any, safe commands, and whether the repo is ready for the next backlog decision.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/next_action.py.",
+        "Add CLI command: kajiya-build-line next.",
+        "Use existing summary payload builder.",
+        "Return compact JSON-compatible output.",
+        "Do not modify project state.",
+        "Keep command read-only."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/next_action.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line next",
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "next command exists.",
+        "next returns compact JSON.",
+        "next includes active_issue_id.",
+        "next includes recommended action.",
+        "next includes safe commands.",
+        "next is read-only.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
