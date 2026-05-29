@@ -223,7 +223,7 @@
     {
       "issue_id": "KBL-007",
       "title": "Add deterministic evidence collection command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "evidence",
       "claim_status": "claimed",
@@ -263,6 +263,11 @@
         "Command returns JSON-compatible output.",
         "Command is read-only.",
         "QA passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-007-evidence-command.md"
       ]
     }
   ]
