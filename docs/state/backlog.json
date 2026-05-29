@@ -622,7 +622,7 @@
     {
       "issue_id": "KBL-015",
       "title": "Add init-project command for bootstrapping Build Line into another repo",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "portable_bootstrap",
       "claim_status": "claimed",
@@ -666,6 +666,11 @@
         "Command returns JSON-compatible output.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-015-init-project-bootstrap.md"
       ]
     }
   ]
