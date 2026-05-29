@@ -1,7 +1,7 @@
 {
   "schema_version": "kajiya.backlog.v1",
   "project_id": "kajiya-build-line",
-  "updated_at": "2026-05-29",
+  "updated_at": "2026-05-30",
   "source_of_truth": "docs/state/backlog.json",
   "rules": [
     "Backlog is required before meaningful implementation.",
@@ -969,7 +969,7 @@
     {
       "issue_id": "KBL-022",
       "title": "Add deterministic backlog orientation command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "operator_orientation",
       "claim_status": "claimed",
@@ -1015,6 +1015,11 @@
         "Command is read-only.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-30",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-022-deterministic-backlog-orientation.md"
       ]
     }
   ]

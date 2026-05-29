@@ -1,9 +1,9 @@
 {
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
-  "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-022",
-  "active_workstream": "deterministic_backlog_orientation",
+  "updated_at": "2026-05-30",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -32,9 +32,10 @@
     "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol.",
     "Completed KBL-019: fixed init-project so AGENTS.md is actually created, listed in created_files, and protected by no-overwrite conflicts.",
     "Completed KBL-020: implemented upstream-improvement command for reusable framework improvement proposals from child repos.",
-    "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts."
+    "Completed KBL-021: added JSON Schema validation for upstream improvement proposal artifacts.",
+    "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy."
   ],
-  "next_recommended_action": "Work on KBL-022: implement kajiya-build-line backlog for deterministic repo/backlog orientation.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
