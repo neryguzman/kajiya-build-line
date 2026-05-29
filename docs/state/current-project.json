@@ -15,9 +15,10 @@
     "Completed KBL-002: /kajiya-onboard was verified through Pi, read local evidence, returned JSON-compatible output, and remained read-only.",
     "Completed KBL-003: created .kajiya/project.json, JSON Schema, pi.dev documentation, and evidence for project profile initialization.",
     "Completed KBL-004: implemented deterministic status and QA commands with JSON-compatible output.",
-    "Completed KBL-006: implemented deterministic close-issue command for backlog/current-project transitions."
+    "Completed KBL-006: implemented deterministic close-issue command for backlog/current-project transitions.",
+    "Completed KBL-005: verified Builder as bounded Pi/Pocock plan-only reasoning step and documented boundary decision."
   ],
-  "next_recommended_action": "Work on KBL-005: Design Builder as bounded Pi/Pocock reasoning step",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

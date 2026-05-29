@@ -145,7 +145,7 @@
     {
       "issue_id": "KBL-005",
       "title": "Design Builder as bounded Pi/Pocock reasoning step",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P1",
       "type": "builder",
       "claim_status": "claimed",
@@ -166,7 +166,12 @@
         "Builder cannot claim files changed unless a deterministic step changed them."
       ],
       "claimed_by": "Nery + ChatGPT",
-      "branch": "main"
+      "branch": "main",
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-005-builder-plan-pi-test.md"
+      ]
     },
     {
       "issue_id": "KBL-006",
