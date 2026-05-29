@@ -618,6 +618,55 @@
       "evidence": [
         "docs/evidence/kbl-014-clear-active-issue-on-close.md"
       ]
+    },
+    {
+      "issue_id": "KBL-015",
+      "title": "Add init-project command for bootstrapping Build Line into another repo",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "portable_bootstrap",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line works inside its own repository, but there is not yet a deterministic command to initialize the required project files inside another repository.",
+      "expected_behavior": "A local-write command can initialize a target repository with project-local Kajiya files: project profile, backlog, current-project state, handoff protocol, evidence folder, task-briefs folder, and basic schemas.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/init_project.py.",
+        "Add CLI command: kajiya-build-line init-project.",
+        "Support --project-id, --project-name, --project-type.",
+        "Default target root is current working directory.",
+        "Create .kajiya/project.json.",
+        "Create docs/state/backlog.json.",
+        "Create docs/state/current-project.json.",
+        "Create docs/LLM_HANDOFF_PROTOCOL.md.",
+        "Create docs/evidence/.gitkeep and docs/task-briefs/.gitkeep.",
+        "Do not overwrite existing files unless a future explicit flag is added.",
+        "Return JSON-compatible output."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/init_project.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line init-project --help",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "kajiya-build-line next",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "init-project command exists.",
+        "init-project exposes required arguments.",
+        "Command creates project-local state files in a target repo.",
+        "Command refuses to overwrite existing files by default.",
+        "Command returns JSON-compatible output.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
