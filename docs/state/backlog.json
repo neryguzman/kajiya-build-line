@@ -269,6 +269,54 @@
       "evidence": [
         "docs/evidence/kbl-007-evidence-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-008",
+      "title": "Add human-authored task brief command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "builder_input_contract",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The operator needs a deterministic way to record a human-authored surgical instruction for the Builder, based on evidence reviewed by humans, instead of sending raw evidence or broad context to the LLM.",
+      "expected_behavior": "A deterministic command creates a task brief JSON file containing issue_id, human instruction, evidence references, allowed files, forbidden actions, and validation commands.",
+      "proposed_change": [
+        "Add docs/pi-devs/kajiya_task_brief.md.",
+        "Add docs/schemas/kajiya-task-brief.schema.json.",
+        "Add src/kajiya_build_line/task_brief.py.",
+        "Add CLI command: kajiya-build-line task-brief.",
+        "Write task briefs under docs/task-briefs/ISSUE_ID.json.",
+        "Return JSON-compatible output.",
+        "Do not invoke LLMs.",
+        "Do not modify source code beyond creating the brief file."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/task_brief.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/pi-devs/kajiya_task_brief.md",
+        "docs/schemas/kajiya-task-brief.schema.json",
+        "docs/task-briefs/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line task-brief --issue-id KBL-008 --instruction \"Implement task-brief command. Do not modify Pi extension.\" --evidence docs/evidence/kbl-007-evidence-command.md --allowed-file src/kajiya_build_line/cli.py --allowed-file src/kajiya_build_line/task_brief.py --validation \"kajiya-build-line qa\"",
+        "kajiya-build-line status",
+        "kajiya-build-line qa",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "task-brief command exists.",
+        "Command creates docs/task-briefs/ISSUE_ID.json.",
+        "Brief records human-authored instruction.",
+        "Brief records evidence references.",
+        "Brief records allowed files.",
+        "Brief records validation commands.",
+        "Command returns JSON-compatible output.",
+        "QA passes."
+      ]
     }
   ]
 }

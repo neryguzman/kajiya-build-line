@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-007",
-  "active_workstream": "deterministic_evidence_collection",
+  "active_issue_id": "KBL-008",
+  "active_workstream": "human_authored_task_brief",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -19,7 +19,7 @@
     "Completed KBL-005: verified Builder as bounded Pi/Pocock plan-only reasoning step and documented boundary decision.",
     "Completed KBL-007: implemented deterministic evidence collection command with read, list, grep, and git-log support."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-008: implement kajiya-build-line task-brief for human-authored Builder instructions.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
