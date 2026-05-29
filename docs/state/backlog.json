@@ -375,6 +375,51 @@
       "evidence": [
         "docs/evidence/kbl-009-validate-json-command.md"
       ]
+    },
+    {
+      "issue_id": "KBL-010",
+      "title": "Refactor CLI command routing to argparse subparsers",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "cli_architecture",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The CLI routing is currently hand-written with string comparisons and has been patched through fragile text replacements. This caused a bug where validate-json appeared in usage text but was not actually dispatched.",
+      "expected_behavior": "The CLI uses argparse subparsers so each command registers its parser and handler in one deterministic routing table.",
+      "proposed_change": [
+        "Refactor src/kajiya_build_line/cli.py to use argparse.ArgumentParser and add_subparsers.",
+        "Preserve existing commands: status, qa, evidence, task-brief, close-issue, validate-json.",
+        "Keep output JSON-compatible.",
+        "Do not change command behavior beyond routing.",
+        "Add evidence documenting that every command still works."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line status",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "kajiya-build-line evidence --read docs/state/backlog.json --list src/kajiya_build_line --grep close_issue --grep-path src --git-log 5",
+        "kajiya-build-line task-brief --issue-id KBL-010 --instruction \"Refactor CLI routing to argparse subparsers without changing command behavior.\" --evidence docs/evidence/kbl-009-validate-json-command.md --allowed-file src/kajiya_build_line/cli.py --validation \"kajiya-build-line qa\"",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "CLI uses argparse subparsers.",
+        "status command still works.",
+        "qa command still works.",
+        "validate-json command still works.",
+        "evidence command still works.",
+        "task-brief command still works.",
+        "close-issue command still works.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }

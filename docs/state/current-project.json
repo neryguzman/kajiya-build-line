@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-009",
-  "active_workstream": "json_schema_validation",
+  "active_issue_id": "KBL-010",
+  "active_workstream": "argparse_subparser_cli_routing",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -21,7 +21,7 @@
     "Completed KBL-008: implemented human-authored task-brief command for bounded Builder instructions.",
     "Completed KBL-009: implemented deterministic JSON Schema validation command."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-010: refactor CLI routing to argparse subparsers while preserving existing command behavior.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
