@@ -474,7 +474,7 @@
     {
       "issue_id": "KBL-012",
       "title": "Add compact status summary command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "operator_experience",
       "claim_status": "claimed",
@@ -515,6 +515,11 @@
         "summary includes backlog counts.",
         "summary is read-only.",
         "QA passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-012-compact-summary-command.md"
       ]
     }
   ]
