@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-019",
+  "active_workstream": "fix_agents_md_bootstrap_regression",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -31,7 +31,7 @@
     "Completed KBL-016: implemented bootstrap-check for read-only repository readiness detection and fixed directory initialization logic.",
     "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-019: fix init-project so AGENTS.md is actually created and protected.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

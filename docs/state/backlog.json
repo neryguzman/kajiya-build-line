@@ -820,6 +820,48 @@
       "evidence": [
         "docs/evidence/kbl-018-agents-bootstrap-protocol.md"
       ]
+    },
+    {
+      "issue_id": "KBL-019",
+      "title": "Fix AGENTS.md bootstrap regression",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "bugfix",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "KBL-018 claimed init-project creates AGENTS.md, but validation in a temporary repo showed AGENTS.md was not created and was not listed in created_files.",
+      "expected_behavior": "init-project creates AGENTS.md in new repositories, includes it in created_files, and blocks on second init-project because AGENTS.md exists.",
+      "proposed_change": [
+        "Inspect src/kajiya_build_line/init_project.py.",
+        "Add a real build_agents_md generator if missing.",
+        "Add AGENTS.md to planned_text_files.",
+        "Ensure AGENTS.md appears in conflicts on second init-project.",
+        "Correct evidence by documenting the original failed validation and the fix."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/init_project.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line init-project --help",
+        "TMP_REPO=$(mktemp -d) && cd \"$TMP_REPO\" && git init && kajiya-build-line init-project --project-id temp-agents-fix --project-name \"Temp AGENTS Fix\" --project-type software_project",
+        "test -f AGENTS.md",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "AGENTS.md is created in a fresh temp repo.",
+        "AGENTS.md appears in created_files.",
+        "Second init-project reports AGENTS.md as a conflict.",
+        "Evidence documents the earlier failed KBL-018 validation.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
