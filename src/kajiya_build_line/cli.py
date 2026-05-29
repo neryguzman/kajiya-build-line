@@ -8,6 +8,7 @@ from typing import Any
 
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.evidence import build_evidence_payload
+from kajiya_build_line.init_project import init_project
 from kajiya_build_line.project_detect import build_status_payload
 from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.summary import build_summary_payload
@@ -19,6 +20,17 @@ from kajiya_build_line.validate_json import build_validation_payload
 def print_json(payload: dict[str, Any]) -> int:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0 if payload.get("ok") else 1
+
+
+def handle_init_project(args: argparse.Namespace) -> int:
+    return print_json(
+        init_project(
+            root=Path.cwd(),
+            project_id=args.project_id,
+            project_name=args.project_name,
+            project_type=args.project_type,
+        )
+    )
 
 
 def handle_next(args: argparse.Namespace) -> int:
@@ -85,6 +97,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    init_project_parser = subparsers.add_parser("init-project", help="Bootstrap Kajiya Build Line files into the current repo.")
+    init_project_parser.add_argument("--project-id", required=True)
+    init_project_parser.add_argument("--project-name", required=True)
+    init_project_parser.add_argument("--project-type", required=True)
+    init_project_parser.set_defaults(handler=handle_init_project)
 
     next_parser = subparsers.add_parser("next", help="Show the next recommended operator action.")
     next_parser.set_defaults(handler=handle_next)
