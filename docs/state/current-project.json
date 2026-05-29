@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-019",
-  "active_workstream": "fix_agents_md_bootstrap_regression",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -29,9 +29,10 @@
     "Completed KBL-015: implemented portable init-project bootstrap command and verified safe non-overwrite behavior.",
     "Completed KBL-017: documented Pi as the selected coding-agent runtime and Kajiya Build Line as the deterministic project governance layer.",
     "Completed KBL-016: implemented bootstrap-check for read-only repository readiness detection and fixed directory initialization logic.",
-    "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol."
+    "Completed KBL-018: init-project now creates AGENTS.md with Kajiya Build Line operating rules and upstream improvement protocol.",
+    "Completed KBL-019: fixed init-project so AGENTS.md is actually created, listed in created_files, and protected by no-overwrite conflicts."
   ],
-  "next_recommended_action": "Work on KBL-019: fix init-project so AGENTS.md is actually created and protected.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

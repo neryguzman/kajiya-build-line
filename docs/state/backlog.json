@@ -824,7 +824,7 @@
     {
       "issue_id": "KBL-019",
       "title": "Fix AGENTS.md bootstrap regression",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "bugfix",
       "claim_status": "claimed",
@@ -861,6 +861,11 @@
         "Evidence documents the earlier failed KBL-018 validation.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-019-fix-agents-bootstrap-regression.md"
       ]
     }
   ]
