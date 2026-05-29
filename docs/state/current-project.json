@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-017",
-  "active_workstream": "pi_runtime_boundary_architecture_decision",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -26,9 +26,10 @@
     "Completed KBL-012: implemented compact operator status summary command.",
     "Completed KBL-013: implemented compact operator next-action command.",
     "Completed KBL-014: close-issue now clears active_issue_id when no next issue is provided.",
-    "Completed KBL-015: implemented portable init-project bootstrap command and verified safe non-overwrite behavior."
+    "Completed KBL-015: implemented portable init-project bootstrap command and verified safe non-overwrite behavior.",
+    "Completed KBL-017: documented Pi as the selected coding-agent runtime and Kajiya Build Line as the deterministic project governance layer."
   ],
-  "next_recommended_action": "Work on KBL-017: document why Kajiya Build Line is different from Pi while using Pi as the coding agent runtime.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

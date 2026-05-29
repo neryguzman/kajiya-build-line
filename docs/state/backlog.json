@@ -722,7 +722,7 @@
     {
       "issue_id": "KBL-017",
       "title": "Document Pi runtime boundary and Kajiya Build Line differentiation",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "architecture_decision",
       "claim_status": "claimed",
@@ -760,6 +760,11 @@
         "Decision mentions JSON Schema and Datomic-style modeling rationale.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-017-pi-runtime-boundary.md"
       ]
     }
   ]
