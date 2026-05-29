@@ -14,7 +14,7 @@
     {
       "issue_id": "KBL-001",
       "title": "Define project vision, backlog, and handoff protocol",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "governance",
       "claim_status": "claimed",
@@ -39,15 +39,17 @@
         "Handoff protocol exists.",
         "Current project state exists.",
         "Changes are committed and pushed."
-      ]
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "a9218f7"
     },
     {
       "issue_id": "KBL-002",
       "title": "Formalize kajiya_onboard_project as the first read-only pi.dev",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P0",
       "type": "pi_dev",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "The local Pi extension can inject an onboarding prompt, but the onboarding station needs to be formalized as the first permanent pi.dev-style step.",
       "expected_behavior": "Running /kajiya-onboard in Pi starts a read-only project discovery step that inspects the current repo and returns JSON-compatible readiness output.",
       "files_likely_to_change": [
@@ -64,7 +66,9 @@
         "/kajiya-onboard executes successfully.",
         "The onboarding prompt does not assume any specific project.",
         "The station is read-only."
-      ]
+      ],
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main"
     },
     {
       "issue_id": "KBL-003",
