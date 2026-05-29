@@ -10,6 +10,7 @@ from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.evidence import build_evidence_payload
 from kajiya_build_line.project_detect import build_status_payload
 from kajiya_build_line.qa import build_qa_payload
+from kajiya_build_line.summary import build_summary_payload
 from kajiya_build_line.task_brief import create_task_brief
 from kajiya_build_line.validate_json import build_validation_payload
 
@@ -17,6 +18,10 @@ from kajiya_build_line.validate_json import build_validation_payload
 def print_json(payload: dict[str, Any]) -> int:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0 if payload.get("ok") else 1
+
+
+def handle_summary(args: argparse.Namespace) -> int:
+    return print_json(build_summary_payload(Path.cwd()))
 
 
 def handle_status(args: argparse.Namespace) -> int:
@@ -75,6 +80,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    summary_parser = subparsers.add_parser("summary", help="Show compact operator status summary.")
+    summary_parser.set_defaults(handler=handle_summary)
 
     status_parser = subparsers.add_parser("status", help="Inspect project state.")
     status_parser.set_defaults(handler=handle_status)
