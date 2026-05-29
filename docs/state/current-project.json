@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-014",
-  "active_workstream": "clear_active_issue_on_close_without_next",
+  "active_issue_id": null,
+  "active_workstream": "backlog_selection",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -24,9 +24,10 @@
     "Completed KBL-011: added JSON Schema validation as a standard QA gate.",
     "Completed KBL-011: added JSON Schema validation as a standard QA gate.",
     "Completed KBL-012: implemented compact operator status summary command.",
-    "Completed KBL-013: implemented compact operator next-action command."
+    "Completed KBL-013: implemented compact operator next-action command.",
+    "Completed KBL-014: close-issue now clears active_issue_id when no next issue is provided."
   ],
-  "next_recommended_action": "Work on KBL-014: clear active_issue_id when close-issue is called without a next issue.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

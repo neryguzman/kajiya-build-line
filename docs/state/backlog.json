@@ -575,7 +575,7 @@
     {
       "issue_id": "KBL-014",
       "title": "Clear active issue when closing without next issue",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "operator_state_consistency",
       "claim_status": "claimed",
@@ -612,6 +612,11 @@
         "Existing next_issue_id activation behavior remains intact.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-014-clear-active-issue-on-close.md"
       ]
     }
   ]
