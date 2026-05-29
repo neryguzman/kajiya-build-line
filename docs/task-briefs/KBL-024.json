@@ -5,7 +5,7 @@
   "created_at": "2026-05-30",
   "updated_at": "2026-05-30",
   "source_of_truth": "docs/task-briefs/KBL-024.json",
-  "human_instruction": "Implement a deterministic checkpoint command that runs QA and validate-json before committing. The command must only commit explicitly provided files. It must return JSON-compatible output including issue_id, commit_message, committed, commit_hash, pushed, and updated_files. Implement --push support, but pushing must only happen when --push is explicitly provided. Do not close issues automatically.",
+  "human_instruction": "Implement a read-only deterministic checkpoint command. It must inspect backlog/current-project state, git status --short, git diff --name-only, git diff --stat, latest commit, QA status, and validate-json status. It must return JSON-compatible output including active_issue_id, active_workstream, dirty, changed_files, diff_stat, latest_commit, qa_ok, validation_ok, task_brief_path, recommended_operator_action, and next_human_input_contract. Do not commit, do not push, do not close issues, and do not modify docs/state from checkpoint.",
   "evidence_refs": [
     "docs/evidence/kbl-023-add-issue-command.md"
   ],
@@ -16,13 +16,14 @@
   ],
   "validation_commands": [
     "python -m compileall src",
+    "kajiya-build-line checkpoint",
     "kajiya-build-line qa",
     "kajiya-build-line validate-json",
     "git --no-pager diff --check"
   ],
   "forbidden_actions": [
-    "Do not run git add . or commit unspecified files.",
-    "Do not push unless --push is explicitly provided.",
+    "Do not commit.",
+    "Do not push.",
     "Do not close backlog issues automatically.",
     "Do not modify docs/state/backlog.json or docs/state/current-project.json from checkpoint."
   ],

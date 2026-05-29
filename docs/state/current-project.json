@@ -3,7 +3,7 @@
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
   "active_issue_id": "KBL-024",
-  "active_workstream": "git_governance",
+  "active_workstream": "deterministic_checkpoint_orientation",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -36,7 +36,7 @@
     "Completed KBL-022: implemented deterministic backlog orientation command so Pi can report repo/backlog state without inventing strategy.",
     "Completed KBL-023: implemented deterministic add-issue command and verified it by creating and activating KBL-024 without heredocs."
   ],
-  "next_recommended_action": "Work on KBL-024: Add deterministic checkpoint commit and push command",
+  "next_recommended_action": "Work on KBL-024: implement read-only checkpoint orientation command.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
