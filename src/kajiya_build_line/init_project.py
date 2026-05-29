@@ -255,6 +255,7 @@ def init_project(
 
     planned_text_files = {
         "docs/LLM_HANDOFF_PROTOCOL.md": build_handoff_protocol(project_name),
+        "AGENTS.md": agents_md(project_id, project_name, project_type),
         "docs/evidence/.gitkeep": "",
         "docs/task-briefs/.gitkeep": "",
     }
