@@ -17,6 +17,7 @@ from kajiya_build_line.project_detect import build_status_payload
 from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.summary import build_summary_payload
 from kajiya_build_line.next_action import build_next_payload
+from kajiya_build_line.run_scenario import run_scenario
 from kajiya_build_line.task_brief import create_task_brief
 from kajiya_build_line.upstream_improvement import create_upstream_improvement
 from kajiya_build_line.validate_json import build_validation_payload
@@ -128,6 +129,10 @@ def handle_task_brief(args: argparse.Namespace) -> int:
 
 def handle_checkpoint(args: argparse.Namespace) -> int:
     return print_json(build_checkpoint_payload(Path.cwd()))
+
+
+def handle_run_scenario(args: argparse.Namespace) -> int:
+    return print_json(run_scenario(root=Path.cwd(), scenario_path=args.scenario))
 
 
 def handle_close_issue(args: argparse.Namespace) -> int:
@@ -250,6 +255,14 @@ def build_parser() -> argparse.ArgumentParser:
     close_issue_parser.add_argument("--completion-note", required=True)
     close_issue_parser.add_argument("--commit")
     close_issue_parser.set_defaults(handler=handle_close_issue)
+
+    run_scenario_parser = subparsers.add_parser(
+        "run-scenario", help="Execute a test scenario from a JSON file."
+    )
+    run_scenario_parser.add_argument(
+        "--scenario", type=Path, required=True, help="Path to the scenario JSON file"
+    )
+    run_scenario_parser.set_defaults(handler=handle_run_scenario)
 
     return parser
 
