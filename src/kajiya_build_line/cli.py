@@ -15,6 +15,7 @@ from kajiya_build_line.qa import build_qa_payload
 from kajiya_build_line.summary import build_summary_payload
 from kajiya_build_line.next_action import build_next_payload
 from kajiya_build_line.task_brief import create_task_brief
+from kajiya_build_line.upstream_improvement import create_upstream_improvement
 from kajiya_build_line.validate_json import build_validation_payload
 
 
@@ -68,6 +69,21 @@ def handle_evidence(args: argparse.Namespace) -> int:
         git_log_limit=args.git_log,
     )
     return print_json(payload)
+
+
+def handle_upstream_improvement(args: argparse.Namespace) -> int:
+    return print_json(
+        create_upstream_improvement(
+            root=Path.cwd(),
+            title=args.title,
+            source_project=args.source_project,
+            problem=args.problem,
+            recommendation=args.recommendation,
+            evidence=args.evidence,
+            target_files=args.target_file,
+            validation_commands=args.validation,
+        )
+    )
 
 
 def handle_task_brief(args: argparse.Namespace) -> int:
@@ -140,6 +156,19 @@ def build_parser() -> argparse.ArgumentParser:
     evidence_parser.add_argument("--grep-path", default=".")
     evidence_parser.add_argument("--git-log", type=int)
     evidence_parser.set_defaults(handler=handle_evidence)
+
+    upstream_parser = subparsers.add_parser(
+        "upstream-improvement",
+        help="Create an upstream improvement proposal artifact.",
+    )
+    upstream_parser.add_argument("--title", required=True)
+    upstream_parser.add_argument("--source-project", required=True)
+    upstream_parser.add_argument("--problem", required=True)
+    upstream_parser.add_argument("--recommendation", required=True)
+    upstream_parser.add_argument("--evidence", action="append", default=[])
+    upstream_parser.add_argument("--target-file", action="append", default=[])
+    upstream_parser.add_argument("--validation", action="append", default=[])
+    upstream_parser.set_defaults(handler=handle_upstream_improvement)
 
     task_brief_parser = subparsers.add_parser(
         "task-brief",

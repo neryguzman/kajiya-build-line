@@ -1,0 +1,30 @@
+{
+  "schema_version": "kajiya.upstream_improvement.v1",
+  "kind": "kajiya_upstream_improvement",
+  "created_at": "2026-05-29",
+  "updated_at": "2026-05-29",
+  "title": "Fix AGENTS bootstrap regression",
+  "slug": "fix-agents-bootstrap-regression",
+  "source_project": "kajiya-build-line",
+  "target_project": "kajiya-build-line",
+  "problem": "init-project had AGENTS generator but did not write AGENTS.md",
+  "recommendation": "Add AGENTS.md to planned_text_files and validate in temp repo",
+  "evidence": [
+    "docs/evidence/kbl-019-fix-agents-bootstrap-regression.md"
+  ],
+  "target_files": [
+    "src/kajiya_build_line/init_project.py"
+  ],
+  "validation_commands": [
+    "kajiya-build-line qa"
+  ],
+  "status": "proposed",
+  "next_steps": [
+    "Review proposal in the source repository.",
+    "Create or link a backlog item in the main kajiya-build-line repository.",
+    "Use the proposal as task-brief input for upstream implementation.",
+    "Run QA and JSON Schema validation in the main kajiya-build-line repository.",
+    "Merge/push upstream changes.",
+    "Update child repositories to the improved Build Line behavior."
+  ]
+}
