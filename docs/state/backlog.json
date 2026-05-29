@@ -1333,6 +1333,60 @@
       "evidence": [
         "docs/evidence/kbl-028-test-scenario-runner.md"
       ]
+    },
+    {
+      "issue_id": "KBL-029",
+      "title": "Add read-only adopt-project command for mature Kajiya repositories",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "project_adoption",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line can initialize fresh repositories, but mature repositories like kajiya-context-engine already have docs/state/current-project.json, docs/state/backlog.json, docs/LLM_HANDOFF_PROTOCOL.md, schema directories, scenario directories, pi.dev governance docs, and project-specific handoff doctrine. Running init-project is not the right flow for these repos.",
+      "expected_behavior": "A read-only adopt-project command inspects the current repository, detects existing Kajiya-compatible artifacts, reports missing Build Line artifacts, warns when init-project should not be used, and returns a JSON-compatible adoption plan without modifying files.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/adopt_project.py.",
+        "Add CLI command: kajiya-build-line adopt-project.",
+        "Inspect only the current working directory using Path.cwd().",
+        "Detect docs/state/current-project.json.",
+        "Detect docs/state/backlog.json.",
+        "Detect docs/LLM_HANDOFF_PROTOCOL.md.",
+        "Detect AGENTS.md.",
+        "Detect docs/org-roam.",
+        "Detect docs/schemas.",
+        "Detect docs/scenarios and docs/test-scenarios.",
+        "Detect .pi/extensions and .pi/kajiya when present.",
+        "Classify repository as fresh_repo, already_initialized, mature_kajiya_repo, partial_kajiya_repo, or incompatible_repo.",
+        "Return do_not_run_init_project when mature project files already exist.",
+        "Return missing recommended artifacts and adoption_plan.",
+        "Do not create, modify, or delete files."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/adopt_project.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/task-briefs/KBL-029.json"
+      ],
+      "validation_commands": [
+        "python -m compileall src",
+        "kajiya-build-line adopt-project",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check"
+      ],
+      "close_criteria": [
+        "adopt-project command exists.",
+        "Command is read-only.",
+        "Command uses current working directory.",
+        "Command detects mature Kajiya repository artifacts.",
+        "Command reports AGENTS.md missing when absent.",
+        "Command reports do_not_run_init_project for mature repos.",
+        "Command returns JSON-compatible output.",
+        "QA passes.",
+        "validate-json passes."
+      ],
+      "created_at": "2026-05-30"
     }
   ]
 }

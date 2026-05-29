@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-30",
-  "active_issue_id": null,
-  "active_workstream": "backlog_selection",
+  "active_issue_id": "KBL-029",
+  "active_workstream": "project_adoption",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -41,7 +41,7 @@
     "Completed KBL-027: added schema-validated test scenario artifacts and documented human/chat deterministic contract architecture.",
     "Completed KBL-028: implemented deterministic run-scenario command and verified the KBL-025 add-issue --from-json behavior contract."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-029: Add read-only adopt-project command for mature Kajiya repositories",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
