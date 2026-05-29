@@ -118,6 +118,67 @@ Rules:
 `;
 }
 
+function builderImplementPrompt(issueId: string): string {
+  return `
+You are executing pi.dev kajiya_builder_implement inside Kajiya Build Line.
+
+Role:
+- You are the bounded Builder.
+- Implement only the existing human-authored task brief.
+- Do not invent strategy.
+- Do not invent roadmap.
+- Do not invent backlog items.
+- Do not create a new plan.
+- Do not modify files outside allowed_files.
+- Do not commit.
+- Do not push.
+- Do not close issues.
+- Do not rely on previous chat memory.
+
+Selected issue_id:
+${issueId}
+
+Source of truth:
+- docs/task-briefs/${issueId}.json
+
+Before editing:
+1. Read docs/task-briefs/${issueId}.json.
+2. Read evidence paths referenced by the task brief if present.
+3. Read only allowed_files from the task brief.
+4. Confirm forbidden_actions from the task brief.
+5. Confirm validation_commands from the task brief.
+
+Implementation rules:
+- Modify only allowed_files.
+- Implement the human_instruction exactly.
+- Do not run mutating project-state commands unless the task brief explicitly allows them.
+- Do not run git add.
+- Do not run git commit.
+- Do not run git push.
+- Do not run close-issue.
+- If required information is missing, stop and return a blocking JSON-compatible result.
+
+After editing:
+- Run the validation_commands from the task brief.
+- Return JSON-compatible output with:
+  - schema_version: "kajiya.builder_implement.v1"
+  - kind: "kajiya_builder_implement"
+  - ok
+  - pi_dev_id: "kajiya_builder_implement"
+  - runtime_status
+  - issue_id
+  - task_brief_path
+  - files_changed
+  - validation_results
+  - git_status_short
+  - satisfies_task_brief
+  - next_safe_actions
+
+Return only implementation results.
+Do not include strategic commentary.
+`;
+}
+
 export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
   const registerOnboard = (name: string) => {
     pi.registerCommand(name, {
@@ -157,6 +218,26 @@ export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
       },
     });
   };
+
+  const registerBuilderImplement = (name: string) => {
+    pi.registerCommand(name, {
+      description: "Launch bounded Builder implementation from a human-authored task brief.",
+      handler: async (args, ctx) => {
+        const rawArgs = Array.isArray(args) ? args.join(" ") : String(args || "");
+        const match = rawArgs.match(/(?:issue_id=|--issue-id\s+)([A-Za-z0-9._-]+)/);
+        const issueId = match?.[1] || rawArgs.trim() || "KBL-025";
+
+        const prompt = builderImplementPrompt(issueId).trim();
+        ctx.ui.setEditorText(prompt);
+        ctx.ui.notify(
+          `${name} implementation prompt for ${issueId} is now in the editor. Press Enter to run it.`,
+          "warn"
+        );
+      },
+    });
+  };
+
+  registerBuilderImplement("kajiya-builder-implement");
 
   registerBuilderContext("kajiya-builder-context");
   registerBuilderContext("kajiya-builder-plan", true);
