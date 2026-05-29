@@ -965,6 +965,57 @@
       "evidence": [
         "docs/evidence/kbl-021-upstream-improvement-schema-validation.md"
       ]
+    },
+    {
+      "issue_id": "KBL-022",
+      "title": "Add deterministic backlog orientation command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "operator_orientation",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The operator needs to ask Pi or another agent what the repository was doing, what the backlog state is, and where the documentation is, without asking the LLM to reason strategically or invent the next roadmap item.",
+      "expected_behavior": "A deterministic backlog orientation command summarizes current backlog state, active issue, last completed work, reading order, strategic breadcrumbs, and safe next operator actions.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/backlog_orient.py.",
+        "Add CLI command: kajiya-build-line backlog.",
+        "Read docs/state/backlog.json and docs/state/current-project.json.",
+        "Return compact JSON-compatible orientation output.",
+        "Include active issue, active workstream, last completed summary, backlog counts, open/in-progress items, resume reading order, strategic breadcrumbs, and safe next actions.",
+        "Do not propose strategic roadmap items.",
+        "Do not modify project state.",
+        "Document that Pi slash command /kajiya-build-backlog should use this deterministic output as its source of truth."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/backlog_orient.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line backlog",
+        "kajiya-build-line next",
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "backlog command exists.",
+        "backlog command returns compact JSON-compatible orientation output.",
+        "Output includes active_issue_id and active_workstream.",
+        "Output includes backlog counts.",
+        "Output includes open and in_progress backlog items.",
+        "Output includes resume_reading_order.",
+        "Output includes strategic breadcrumbs.",
+        "Output avoids strategic roadmap invention.",
+        "Command is read-only.",
+        "QA passes.",
+        "validate-json passes."
+      ]
     }
   ]
 }
