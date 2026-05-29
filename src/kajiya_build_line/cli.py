@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from kajiya_build_line.add_issue import add_issue
 from kajiya_build_line.backlog import close_issue
 from kajiya_build_line.backlog_orient import build_backlog_orientation_payload
 from kajiya_build_line.bootstrap_check import build_bootstrap_check_payload
@@ -23,6 +24,25 @@ from kajiya_build_line.validate_json import build_validation_payload
 def print_json(payload: dict[str, Any]) -> int:
     print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0 if payload.get("ok") else 1
+
+
+def handle_add_issue(args: argparse.Namespace) -> int:
+    return print_json(
+        add_issue(
+            root=Path.cwd(),
+            issue_id=args.issue_id,
+            title=args.title,
+            priority=args.priority,
+            issue_type=args.type,
+            problem=args.problem,
+            expected_behavior=args.expected_behavior,
+            proposed_changes=args.proposed_change,
+            files_likely_to_change=args.file,
+            validation_commands=args.validation,
+            close_criteria=args.close_criterion,
+            activate=args.activate,
+        )
+    )
 
 
 def handle_backlog(args: argparse.Namespace) -> int:
@@ -123,6 +143,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    add_issue_parser = subparsers.add_parser(
+        "add-issue",
+        help="Add a backlog issue deterministically.",
+    )
+    add_issue_parser.add_argument("--issue-id", required=True)
+    add_issue_parser.add_argument("--title", required=True)
+    add_issue_parser.add_argument("--priority", required=True)
+    add_issue_parser.add_argument("--type", required=True)
+    add_issue_parser.add_argument("--problem", required=True)
+    add_issue_parser.add_argument("--expected-behavior", required=True)
+    add_issue_parser.add_argument("--proposed-change", action="append", default=[])
+    add_issue_parser.add_argument("--file", action="append", default=[])
+    add_issue_parser.add_argument("--validation", action="append", default=[])
+    add_issue_parser.add_argument("--close-criterion", action="append", default=[])
+    add_issue_parser.add_argument("--activate", action="store_true")
+    add_issue_parser.set_defaults(handler=handle_add_issue)
 
     backlog_parser = subparsers.add_parser("backlog", help="Show deterministic backlog orientation.")
     backlog_parser.set_defaults(handler=handle_backlog)
