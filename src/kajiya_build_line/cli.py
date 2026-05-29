@@ -42,6 +42,7 @@ def handle_add_issue(args: argparse.Namespace) -> int:
             validation_commands=args.validation,
             close_criteria=args.close_criterion,
             activate=args.activate,
+            from_json_file=args.from_json,
         )
     )
 
@@ -153,17 +154,18 @@ def build_parser() -> argparse.ArgumentParser:
         "add-issue",
         help="Add a backlog issue deterministically.",
     )
-    add_issue_parser.add_argument("--issue-id", required=True)
-    add_issue_parser.add_argument("--title", required=True)
-    add_issue_parser.add_argument("--priority", required=True)
-    add_issue_parser.add_argument("--type", required=True)
-    add_issue_parser.add_argument("--problem", required=True)
-    add_issue_parser.add_argument("--expected-behavior", required=True)
+    add_issue_parser.add_argument("--issue-id")
+    add_issue_parser.add_argument("--title")
+    add_issue_parser.add_argument("--priority")
+    add_issue_parser.add_argument("--type")
+    add_issue_parser.add_argument("--problem")
+    add_issue_parser.add_argument("--expected-behavior")
     add_issue_parser.add_argument("--proposed-change", action="append", default=[])
     add_issue_parser.add_argument("--file", action="append", default=[])
     add_issue_parser.add_argument("--validation", action="append", default=[])
     add_issue_parser.add_argument("--close-criterion", action="append", default=[])
     add_issue_parser.add_argument("--activate", action="store_true")
+    add_issue_parser.add_argument("--from-json", type=Path, help="Load issue fields from a JSON file")
     add_issue_parser.set_defaults(handler=handle_add_issue)
 
     backlog_parser = subparsers.add_parser("backlog", help="Show deterministic backlog orientation.")

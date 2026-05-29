@@ -29,10 +29,89 @@ def add_issue(
     activate: bool = False,
     claimed_by: str = "Nery + ChatGPT",
     branch: str = "main",
+    from_json_file: Path | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
     backlog_path = root / "docs" / "state" / "backlog.json"
     current_path = root / "docs" / "state" / "current-project.json"
+
+    json_data: dict[str, Any] = {}
+    if from_json_file:
+        if not from_json_file.exists():
+            return {
+                "schema_version": "kajiya.add_issue_result.v1",
+                "kind": "kajiya_add_issue_result",
+                "ok": False,
+                "pi_dev_id": "kajiya_add_issue",
+                "runtime_status": "file_not_found",
+                "file": str(from_json_file),
+                "next_safe_actions": [],
+            }
+        try:
+            json_data = load_json(from_json_file)
+        except json.JSONDecodeError as e:
+            return {
+                "schema_version": "kajiya.add_issue_result.v1",
+                "kind": "kajiya_add_issue_result",
+                "ok": False,
+                "pi_dev_id": "kajiya_add_issue",
+                "runtime_status": "invalid_json",
+                "file": str(from_json_file),
+                "error": str(e),
+                "next_safe_actions": [],
+            }
+
+    # Required fields, CLI arguments take precedence
+    issue_id_final = issue_id if issue_id is not None else json_data.get("issue_id")
+    title_final = title if title is not None else json_data.get("title")
+    priority_final = priority if priority is not None else json_data.get("priority")
+    issue_type_final = issue_type if issue_type is not None else json_data.get("type")
+    problem_final = problem if problem is not None else json_data.get("problem")
+    expected_behavior_final = (
+        expected_behavior
+        if expected_behavior is not None
+        else json_data.get("expected_behavior")
+    )
+
+    missing_required_fields = []
+    if issue_id_final is None: missing_required_fields.append("issue_id")
+    if title_final is None: missing_required_fields.append("title")
+    if priority_final is None: missing_required_fields.append("priority")
+    if issue_type_final is None: missing_required_fields.append("type")
+    if problem_final is None: missing_required_fields.append("problem")
+    if expected_behavior_final is None: missing_required_fields.append("expected_behavior")
+
+    if missing_required_fields:
+        return {
+            "schema_version": "kajiya.add_issue_result.v1",
+            "kind": "kajiya_add_issue_result",
+            "ok": False,
+            "pi_dev_id": "kajiya_add_issue",
+            "runtime_status": "missing_required_fields",
+            "missing_fields": missing_required_fields,
+            "next_safe_actions": [],
+        }
+
+    # Optional fields, CLI arguments take precedence
+    proposed_changes_final = proposed_changes if proposed_changes else json_data.get("proposed_change", [])
+    files_likely_to_change_final = files_likely_to_change if files_likely_to_change else json_data.get("files_likely_to_change", [])
+    validation_commands_final = validation_commands if validation_commands else json_data.get("validation_commands", [])
+    close_criteria_final = close_criteria if close_criteria else json_data.get("close_criteria", [])
+    # CLI --activate takes precedence
+    activate_final = activate or json_data.get("activate", False)
+
+    # Use the final resolved values for issue creation
+    issue_id = issue_id_final
+    title = title_final
+    priority = priority_final
+    issue_type = issue_type_final
+    problem = problem_final
+    expected_behavior = expected_behavior_final
+    proposed_changes = proposed_changes_final
+    files_likely_to_change = files_likely_to_change_final
+    validation_commands = validation_commands_final
+    close_criteria = close_criteria_final
+    activate = activate_final
 
     missing = []
     if not backlog_path.exists():
