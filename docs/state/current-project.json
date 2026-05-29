@@ -2,8 +2,8 @@
   "schema_version": "kajiya.current_project.v1",
   "project_id": "kajiya-build-line",
   "updated_at": "2026-05-29",
-  "active_issue_id": "KBL-011",
-  "active_workstream": "qa_schema_validation_gate",
+  "active_issue_id": "KBL-012",
+  "active_workstream": "compact_operator_status_summary",
   "last_completed": [
     "Created local repository.",
     "Pushed main branch to GitHub origin.",
@@ -24,7 +24,7 @@
     "Completed KBL-011: added JSON Schema validation as a standard QA gate.",
     "Completed KBL-011: added JSON Schema validation as a standard QA gate."
   ],
-  "next_recommended_action": "Select the next backlog item.",
+  "next_recommended_action": "Work on KBL-012: implement kajiya-build-line summary for compact operator decision-making.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",

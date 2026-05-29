@@ -470,6 +470,52 @@
       "evidence": [
         "docs/evidence/kbl-011-qa-schema-validation-gate.md"
       ]
+    },
+    {
+      "issue_id": "KBL-012",
+      "title": "Add compact status summary command",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "operator_experience",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "Kajiya Build Line commands return correct JSON, but status and QA outputs are too large for quick operator decision-making.",
+      "expected_behavior": "A deterministic summary command returns a compact JSON dashboard with active issue, dirty state, QA status, validation status, backlog counts, and next recommended action.",
+      "proposed_change": [
+        "Add src/kajiya_build_line/summary.py.",
+        "Add CLI command: kajiya-build-line summary.",
+        "Use existing status, qa, and validate-json payload builders.",
+        "Return compact JSON-compatible output.",
+        "Do not modify project state.",
+        "Keep command read-only."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/summary.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/state/backlog.json",
+        "docs/state/current-project.json"
+      ],
+      "validation_commands": [
+        "kajiya-build-line summary",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "kajiya-build-line status",
+        "git --no-pager diff --check",
+        "python -m compileall src"
+      ],
+      "close_criteria": [
+        "summary command exists.",
+        "summary returns compact JSON.",
+        "summary includes active_issue_id.",
+        "summary includes dirty state.",
+        "summary includes QA status.",
+        "summary includes validation status.",
+        "summary includes backlog counts.",
+        "summary is read-only.",
+        "QA passes."
+      ]
     }
   ]
 }
