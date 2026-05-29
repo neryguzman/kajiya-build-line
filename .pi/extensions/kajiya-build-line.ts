@@ -49,6 +49,62 @@ Rules:
 `;
 }
 
+
+function builderPlanPrompt(issueId: string): string {
+  return `
+You are executing pi.dev kajiya_builder_patch_plan inside Kajiya Build Line.
+
+Role:
+- Produce a bounded implementation plan for a selected backlog issue.
+- Do not modify files.
+- Do not create code.
+- Do not run external writes.
+- Do not use direct Gemini SDK.
+- Use Pi/Pocock as the LLM runtime.
+- Use local project files as memory.
+- Do not rely on previous chat memory.
+
+Selected issue_id:
+${issueId}
+
+Before planning, inspect read-only evidence:
+
+1. Run: kajiya-build-line status
+2. Run: kajiya-build-line qa
+3. Read: docs/state/backlog.json
+4. Read: docs/state/current-project.json
+5. Read: docs/pi-devs/kajiya_builder_patch_plan.md
+6. Read relevant schemas under docs/schemas/
+
+Return JSON-compatible output with:
+- schema_version: "kajiya.builder_patch_plan.v1"
+- kind: "kajiya_builder_patch_plan"
+- ok
+- pi_dev_id: "kajiya_builder_patch_plan"
+- runtime_status
+- issue_id
+- objective
+- evidence_read
+- missing_evidence
+- proposed_change_type
+- files_likely_to_change
+- implementation_plan
+- validation_commands
+- risks
+- requires_human_approval
+- next_safe_actions
+
+Rules:
+- Plan-only.
+- If git is dirty, return runtime_status "blocked_dirty_worktree".
+- If QA fails, return runtime_status "qa_failed".
+- If issue_id is missing or not found, return a blocking status.
+- Do not claim files were changed.
+- Do not close issues.
+- Do not commit.
+`;
+}
+
 export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
   const registerOnboard = (name: string) => {
     pi.registerCommand(name, {
@@ -68,4 +124,20 @@ export default function kajiyaBuildLineExtension(pi: ExtensionAPI) {
 
   registerOnboard("kajiya-onboard");
   registerOnboard("kajiya-build-line");
+
+  pi.registerCommand("kajiya-builder-plan", {
+    description: "Prepare a bounded Kajiya Builder patch plan prompt for a selected issue.",
+    handler: async (args, ctx) => {
+      const rawArgs = Array.isArray(args) ? args.join(" ") : String(args || "");
+      const match = rawArgs.match(/(?:issue_id=|--issue-id\s+)([A-Za-z0-9._-]+)/);
+      const issueId = match?.[1] || rawArgs.trim() || "KBL-005";
+
+      const prompt = builderPlanPrompt(issueId).trim();
+      ctx.ui.setEditorText(prompt);
+      ctx.ui.notify(
+        `kajiya_builder_patch_plan prompt for ${issueId} is now in the editor. Press Enter to run it.`,
+        "info"
+      );
+    },
+  });
 }
