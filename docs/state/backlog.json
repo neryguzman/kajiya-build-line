@@ -78,7 +78,7 @@
     {
       "issue_id": "KBL-003",
       "title": "Add project profile initialization with explicit confirmation",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "local_write_guarded",
       "claim_status": "claimed",
@@ -101,15 +101,20 @@
         "Profile is portable across computers."
       ],
       "claimed_by": "Nery + ChatGPT",
-      "branch": "main"
+      "branch": "main",
+      "completed_at": "2026-05-29",
+      "evidence": [
+        "docs/evidence/kbl-003-project-profile-init.md"
+      ],
+      "last_activity_commit": "pending_commit"
     },
     {
       "issue_id": "KBL-004",
       "title": "Add deterministic status and QA commands",
-      "status": "open",
+      "status": "in_progress",
       "priority": "P1",
       "type": "qa",
-      "claim_status": "unclaimed",
+      "claim_status": "claimed",
       "problem": "The build line needs deterministic checks before and after Builder-assisted work.",
       "expected_behavior": "Commands can inspect git status, compile Python sources, check expected files, and report JSON without LLM reasoning.",
       "files_likely_to_change": [
@@ -127,7 +132,9 @@
         "Status works from an external git repo.",
         "QA is read-only and deterministic.",
         "Output is JSON-compatible."
-      ]
+      ],
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main"
     },
     {
       "issue_id": "KBL-005",

@@ -1,0 +1,60 @@
+{
+  "schema_version": "kajiya.project.v1",
+  "kind": "kajiya_project_profile",
+  "project_id": "kajiya-build-line",
+  "project_name": "Kajiya Build Line",
+  "project_type": "portable_development_build_line",
+  "created_at": "2026-05-29",
+  "updated_at": "2026-05-29",
+  "source_of_truth": ".kajiya/project.json",
+  "purpose": "Portable Pi/Pocock-governed development build line for backlog-first, handoff-ready, deterministic project work.",
+  "canonical_paths": {
+    "backlog": "docs/state/backlog.json",
+    "current_project": "docs/state/current-project.json",
+    "handoff_protocol": "docs/LLM_HANDOFF_PROTOCOL.md",
+    "project_scope_decision": "docs/decisions/0001-project-scope.md",
+    "pi_dev_docs": "docs/pi-devs",
+    "schemas": "docs/schemas",
+    "evidence": "docs/evidence"
+  },
+  "runtime": {
+    "llm_runtime": "pi_pocock",
+    "provider": "configured_in_pi",
+    "direct_model_sdk_required": false,
+    "extension_mode": "project_local_first",
+    "primary_extension": ".pi/extensions/kajiya-build-line.ts"
+  },
+  "memory_policy": {
+    "llm_memory": "do_not_rely_on_chat_memory",
+    "project_memory": "project_files_only",
+    "global_memory": "portable_doctrine_only",
+    "project_specific_state_location": "this_repository"
+  },
+  "data_model_policy": {
+    "canonical_format": "json",
+    "validation": "json_schema",
+    "future_migration_target": "datomic_style_datoms",
+    "record_design_rules": [
+      "Every durable record should declare schema_version.",
+      "Every durable record should declare kind.",
+      "Every durable record should use stable ids where possible.",
+      "Every durable record should be representable as entity-attribute-value facts later.",
+      "Snapshots and events should remain appendable or traceable where practical."
+    ]
+  },
+  "default_validation_commands": [
+    "git --no-pager diff --check",
+    "python -m compileall src"
+  ],
+  "safety_policy": {
+    "onboarding": "read_only",
+    "project_profile_init": "local_write_requires_explicit_human_confirmation",
+    "builder": "plan_only_until_approved",
+    "qa": "deterministic_read_only_where_possible",
+    "external_writes": "forbidden_without_specific_confirmed_pi_dev"
+  },
+  "active_pi_devs": [
+    "kajiya_onboard_project",
+    "kajiya_init_project_profile"
+  ]
+}

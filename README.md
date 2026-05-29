@@ -81,3 +81,19 @@ The repository has:
 - initial GitHub remote
 
 The next priority is to formalize the project backlog, handoff protocol, and local project profile.
+
+## Data model policy
+
+Kajiya Build Line uses JSON as the current canonical storage format and JSON Schema as the validation contract.
+
+The long-term design target is Datomic-style migration. Durable records should therefore be shaped as stable, explicit, versioned facts that can later be transformed into entity-attribute-value records.
+
+Every durable JSON record should try to include:
+
+- `schema_version`
+- `kind`
+- stable id
+- `source_of_truth`
+- clear timestamps where relevant
+- validation schema
+- safety metadata where relevant

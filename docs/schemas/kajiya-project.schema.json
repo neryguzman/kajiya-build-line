@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kajiya.local/schemas/kajiya-project.schema.json",
+  "title": "Kajiya Project Profile",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "kind",
+    "project_id",
+    "project_name",
+    "project_type",
+    "source_of_truth",
+    "canonical_paths",
+    "runtime",
+    "memory_policy",
+    "data_model_policy",
+    "safety_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "kajiya.project.v1"
+    },
+    "kind": {
+      "const": "kajiya_project_profile"
+    },
+    "project_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "project_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "source_of_truth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "canonical_paths": {
+      "type": "object",
+      "required": [
+        "backlog",
+        "current_project",
+        "handoff_protocol"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": [
+        "llm_runtime",
+        "provider",
+        "direct_model_sdk_required"
+      ],
+      "properties": {
+        "llm_runtime": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "direct_model_sdk_required": {
+          "type": "boolean"
+        },
+        "extension_mode": {
+          "type": "string"
+        },
+        "primary_extension": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "memory_policy": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "data_model_policy": {
+      "type": "object",
+      "required": [
+        "canonical_format",
+        "validation",
+        "future_migration_target"
+      ],
+      "properties": {
+        "canonical_format": {
+          "type": "string"
+        },
+        "validation": {
+          "type": "string"
+        },
+        "future_migration_target": {
+          "type": "string"
+        },
+        "record_design_rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "default_validation_commands": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "safety_policy": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "active_pi_devs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
