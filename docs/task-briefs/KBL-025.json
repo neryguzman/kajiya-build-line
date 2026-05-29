@@ -1,0 +1,43 @@
+{
+  "schema_version": "kajiya.task_brief.v1",
+  "kind": "kajiya_task_brief",
+  "issue_id": "KBL-025",
+  "created_at": "2026-05-30",
+  "updated_at": "2026-05-30",
+  "source_of_truth": "docs/task-briefs/KBL-025.json",
+  "human_instruction": "Implement --from-json support for kajiya-build-line add-issue. The command must preserve the existing explicit argument mode. When --from-json FILE is provided, load issue fields from that JSON file and create the backlog item deterministically. CLI --activate may override or supplement an activate field in the JSON. Return JSON-compatible errors for missing required fields, invalid JSON, missing file, or duplicate issue_id. Do not modify project state except through the existing add_issue behavior.",
+  "evidence_refs": [
+    "docs/evidence/kbl-023-add-issue-command.md"
+  ],
+  "allowed_files": [
+    "src/kajiya_build_line/add_issue.py",
+    "src/kajiya_build_line/cli.py",
+    "docs/task-briefs/KBL-025.json"
+  ],
+  "validation_commands": [
+    "python -m compileall src",
+    "kajiya-build-line add-issue --help",
+    "kajiya-build-line qa",
+    "kajiya-build-line validate-json",
+    "git --no-pager diff --check"
+  ],
+  "forbidden_actions": [
+    "Do not modify docs/state/backlog.json or docs/state/current-project.json during implementation except when explicitly testing add-issue behavior.",
+    "Do not commit.",
+    "Do not push.",
+    "Do not close backlog issues automatically."
+  ],
+  "builder_mode": "bounded_patch_plan",
+  "requires_human_approval": true,
+  "next_safe_actions": [
+    {
+      "action": "run_builder_plan",
+      "command": "/kajiya-builder-plan issue_id=KBL-025",
+      "brief": "docs/task-briefs/KBL-025.json"
+    },
+    {
+      "action": "review_brief",
+      "path": "docs/task-briefs/KBL-025.json"
+    }
+  ]
+}
