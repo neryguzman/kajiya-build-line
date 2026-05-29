@@ -1139,6 +1139,49 @@
       "evidence": [
         "docs/evidence/kbl-024-read-only-checkpoint-orientation.md"
       ]
+    },
+    {
+      "issue_id": "KBL-025",
+      "title": "Add JSON file input support to add-issue",
+      "status": "in_progress",
+      "priority": "P0",
+      "type": "backlog_governance",
+      "claim_status": "claimed",
+      "claimed_by": "Nery + ChatGPT",
+      "branch": "main",
+      "problem": "The add-issue command removes the need for Python heredocs, but complex backlog items still require long CLI argument lists. Human/chat workflows need a way to provide a structured JSON issue file that the deterministic CLI can validate and apply.",
+      "expected_behavior": "add-issue supports --from-json FILE to create a backlog item from a JSON object while preserving the existing explicit argument mode.",
+      "proposed_change": [
+        "Update src/kajiya_build_line/add_issue.py to load issue fields from a JSON file.",
+        "Update src/kajiya_build_line/cli.py to support --from-json.",
+        "Keep existing argument-based add-issue behavior working.",
+        "Allow activation using either --activate or an activate field in the JSON file.",
+        "Return JSON-compatible errors for missing required fields or duplicate issue IDs.",
+        "Validate behavior in a temporary repo or controlled command run and document evidence."
+      ],
+      "files_likely_to_change": [
+        "src/kajiya_build_line/add_issue.py",
+        "src/kajiya_build_line/cli.py",
+        "docs/evidence/",
+        "docs/task-briefs/KBL-025.json"
+      ],
+      "validation_commands": [
+        "python -m compileall src",
+        "kajiya-build-line qa",
+        "kajiya-build-line validate-json",
+        "git --no-pager diff --check",
+        "kajiya-build-line add-issue --help"
+      ],
+      "close_criteria": [
+        "add-issue supports --from-json FILE.",
+        "Existing argument mode still works.",
+        "Duplicate issue IDs are still blocked.",
+        "Missing required JSON fields return JSON-compatible errors.",
+        "A JSON file can create and activate a backlog item.",
+        "QA passes.",
+        "validate-json passes."
+      ],
+      "created_at": "2026-05-30"
     }
   ]
 }
