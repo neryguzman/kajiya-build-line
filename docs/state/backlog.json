@@ -273,7 +273,7 @@
     {
       "issue_id": "KBL-008",
       "title": "Add human-authored task brief command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "builder_input_contract",
       "claim_status": "claimed",
@@ -316,6 +316,11 @@
         "Brief records validation commands.",
         "Command returns JSON-compatible output.",
         "QA passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-008-task-brief-command.md"
       ]
     }
   ]

@@ -17,9 +17,10 @@
     "Completed KBL-004: implemented deterministic status and QA commands with JSON-compatible output.",
     "Completed KBL-006: implemented deterministic close-issue command for backlog/current-project transitions.",
     "Completed KBL-005: verified Builder as bounded Pi/Pocock plan-only reasoning step and documented boundary decision.",
-    "Completed KBL-007: implemented deterministic evidence collection command with read, list, grep, and git-log support."
+    "Completed KBL-007: implemented deterministic evidence collection command with read, list, grep, and git-log support.",
+    "Completed KBL-008: implemented human-authored task-brief command for bounded Builder instructions."
   ],
-  "next_recommended_action": "Work on KBL-008: implement kajiya-build-line task-brief for human-authored Builder instructions.",
+  "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
     "README.md",
     "docs/state/current-project.json",
