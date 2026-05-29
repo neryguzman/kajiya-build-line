@@ -326,7 +326,7 @@
     {
       "issue_id": "KBL-009",
       "title": "Add JSON Schema validation command",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "schema_validation",
       "claim_status": "claimed",
@@ -369,6 +369,11 @@
         "Command returns JSON-compatible output.",
         "Command is read-only.",
         "QA passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-009-validate-json-command.md"
       ]
     }
   ]
