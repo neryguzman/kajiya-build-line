@@ -676,7 +676,7 @@
     {
       "issue_id": "KBL-016",
       "title": "Add bootstrap-check command for repo readiness detection",
-      "status": "in_progress",
+      "status": "done",
       "priority": "P0",
       "type": "portable_bootstrap",
       "claim_status": "claimed",
@@ -717,6 +717,11 @@
         "bootstrap-check returns JSON-compatible output.",
         "QA passes.",
         "validate-json passes."
+      ],
+      "completed_at": "2026-05-29",
+      "last_activity_commit": "pending_commit",
+      "evidence": [
+        "docs/evidence/kbl-016-bootstrap-check.md"
       ]
     },
     {

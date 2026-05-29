@@ -27,7 +27,8 @@
     "Completed KBL-013: implemented compact operator next-action command.",
     "Completed KBL-014: close-issue now clears active_issue_id when no next issue is provided.",
     "Completed KBL-015: implemented portable init-project bootstrap command and verified safe non-overwrite behavior.",
-    "Completed KBL-017: documented Pi as the selected coding-agent runtime and Kajiya Build Line as the deterministic project governance layer."
+    "Completed KBL-017: documented Pi as the selected coding-agent runtime and Kajiya Build Line as the deterministic project governance layer.",
+    "Completed KBL-016: implemented bootstrap-check for read-only repository readiness detection and fixed directory initialization logic."
   ],
   "next_recommended_action": "Select the next backlog item.",
   "resume_reading_order": [
